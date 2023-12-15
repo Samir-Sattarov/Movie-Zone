@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
+import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_one.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -18,14 +19,13 @@ class OnBoardingScreen extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage(Assets.tOnBoardingBackground))),
         child: Padding(
-          padding:   EdgeInsets.only(left: 20.w,right: 20.w, bottom: 52.h),
+          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 52.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 "onBoardingTitle".tr(),
                 textAlign: TextAlign.center,
-        
                 style: TextStyle(
                   fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
@@ -37,21 +37,19 @@ class OnBoardingScreen extends StatelessWidget {
                 "onBoardingDescription".tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize:  16.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: const Color(0xffB9BFC1),
                 ),
               ),
               SizedBox(height: 40.h),
-        
               ButtonWidget(
                 title: "signIn".tr(),
-        
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, SignInScreenPartOne.route());
+                },
               ),
-        
               SizedBox(height: 16.h),
-        
               ButtonWidget(
                 title: "signUp".tr(),
                 onTap: () {},

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
 
 import 'features/auth/presentation/screens/on_boarding_screen.dart';
+import 'features/auth/presentation/screens/sign_in_part_one.dart';
 import 'main.dart';
 
 class Application extends StatelessWidget {
@@ -23,6 +24,7 @@ class Application extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           theme: ThemeData(
+            scaffoldBackgroundColor: const Color(0xff0F1111),
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),

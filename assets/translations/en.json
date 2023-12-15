@@ -2,5 +2,10 @@
   "onBoardingTitle" : "Streaming all movie on the go",
   "onBoardingDescription" : "Stream 4K quality movies, enjoy with downloads. Unlimited entertainment on your hands."
   "signIn" : "Sign in",
-  "signUp" : "Sign up"
+  "signUp" : "Sign up",
+  "continue" : "Continue",
+  "enterYourEmail" : "Enter your email",
+  "enterYourEmailSubtitle" : "Enter your email to continue to create to your account",
+  "signInPartOneDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies",
+  "help" : "Help"
 }
