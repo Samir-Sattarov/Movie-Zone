@@ -23,7 +23,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isEnabled ?  onTap : null,
       child: Container(
         height: 43.h,
         width: width ?? MediaQuery.of(context).size.width,

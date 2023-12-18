@@ -7,6 +7,9 @@
   "enterYourEmail" : "Enter your email",
   "enterYourEmailSubtitle" : "Enter your email to continue to create to your account",
   "signInPartOneDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies",
-  "help" : "Help"
+  "help" : "Help",
+  "enterYourPassword" : "Enter your password",
+  "enterYourPasswordSubtitle" : "Enter your password to continue to create to your account",
+  "signInPartTwoDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies"
 
 }

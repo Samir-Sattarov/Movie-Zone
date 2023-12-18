@@ -6,21 +6,20 @@ import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/utils/form_validator.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
-import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_two.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class SignInScreenPartOne extends StatefulWidget {
+class SignInScreenPartTwo extends StatefulWidget {
   static route() => MaterialPageRoute(
-        builder: (context) => const SignInScreenPartOne(),
+        builder: (context) => const SignInScreenPartTwo(),
       );
-  const SignInScreenPartOne({Key? key}) : super(key: key);
+  const SignInScreenPartTwo({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreenPartOne> createState() => _SignInScreenPartOneState();
+  State<SignInScreenPartTwo> createState() => _SignInScreenPartTwoState();
 }
 
-class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
+class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
   final TextEditingController controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -71,7 +70,7 @@ class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
                     ),
                   ),
                   Text(
-                    "enterYourEmail".tr(),
+                    "enterYourPassword".tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24.sp,
@@ -80,7 +79,7 @@ class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "enterYourEmailSubtitle".tr(),
+                    "enterYourPasswordSubtitle".tr(),
                     style: TextStyle(
                       color: const Color(0xffB9BFC1),
                       fontSize: 16.sp,
@@ -94,12 +93,12 @@ class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
 
                       });
                     },
-                    hint: 'enterYourEmail'.tr(),
-                    validator: FormValidator.validateEmail,
+                    hint: 'enterYourPassword'.tr(),
+                    validator: FormValidator.password,
                   ),
                   const Spacer(),
                   Text(
-                    "signInPartOneDescription".tr(),
+                    "signInPartTwoDescription".tr(),
                     style: TextStyle(
                       color: const Color(0xffB9BFC1),
                       fontSize: 16.sp,
@@ -108,9 +107,7 @@ class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
                   SizedBox(height: 24.h),
                   ButtonWidget(
                     title: "continue".tr(),
-                    onTap: () {
-                      Navigator.push(context, SignInScreenPartTwo.route());
-                    },
+                    onTap: () {},
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),
                   SizedBox(height: 45.h),
