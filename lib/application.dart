@@ -5,6 +5,7 @@ import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
 
 import 'features/auth/presentation/screens/on_boarding_screen.dart';
 import 'features/auth/presentation/screens/sign_in_part_one.dart';
+import 'features/auth/presentation/screens/sign_in_part_three.dart';
 import 'main.dart';
 
 class Application extends StatelessWidget {
@@ -15,7 +16,7 @@ class Application extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      child: const OnBoardingScreen(),
+      child: const SignInScreenPartThree(),
       builder: (context, child) {
         return MaterialApp(
           title: 'Movie Zone',
