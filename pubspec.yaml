@@ -44,6 +44,8 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_keyboard_visibility: ^5.4.1
   pinput: ^3.0.1
+  equatable: ^2.0.5
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
+    - assets/svg/
     - assets/
   #   - images/a_dot_ham.jpeg
 

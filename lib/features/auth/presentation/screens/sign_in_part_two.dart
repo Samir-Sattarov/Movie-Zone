@@ -6,6 +6,7 @@ import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/utils/form_validator.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
+import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_three.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -107,7 +108,9 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                   SizedBox(height: 24.h),
                   ButtonWidget(
                     title: "continue".tr(),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, SignInScreenPartThree.route());
+                    },
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),
                   SizedBox(height: 45.h),

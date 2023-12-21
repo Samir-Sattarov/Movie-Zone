@@ -14,7 +14,11 @@
   "enterYourOTPCode" : "Enter OTP code",
   "enterYourOTPCodeSubtitle" : "Enter the OTP code that we will send to your email",
   "enterYourOTPCodeSubtitleTwo" : "Not receiving email? check on promotion page, spam or Resend code",
-  "signInPartThreeDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies"
+  "signInPartThreeDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies",
+  "startWatching" : "Start watching",
+  "download" : "Download",
+  "trailer" : "Trailer",
+  "basedOnOpenedFilm" : "Based on {} Cast"
 
 
 }
