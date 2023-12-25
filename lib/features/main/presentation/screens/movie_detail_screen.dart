@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
-import 'package:movie_zone/features/main/domain/entities/movie_detail_entity.dart';
+import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
 import 'package:movie_zone/features/main/presentation/widget/poster_widget.dart';
 import 'package:movie_zone/features/main/presentation/widget/trailer_widget.dart';
 import 'package:readmore/readmore.dart';
@@ -12,13 +12,13 @@ import 'package:readmore/readmore.dart';
 import '../../../../core/utils/assets.dart';
 
 class MovieDetailScreen extends StatelessWidget {
-  static route({required MovieDetailEntity detailEntity}) => MaterialPageRoute(
+  static route({required MovieEntity detailEntity}) => MaterialPageRoute(
         builder: (context) => MovieDetailScreen(
           detailEntity: detailEntity,
         ),
       );
 
-  final MovieDetailEntity detailEntity;
+  final MovieEntity detailEntity;
   const MovieDetailScreen({Key? key, required this.detailEntity})
       : super(key: key);
 
@@ -49,16 +49,19 @@ class MovieDetailScreen extends StatelessWidget {
                         ),
                         Container(
                           decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
                                 Color(0xFF0F1111),
                                 Colors.transparent,
                                 Colors.transparent,
                                 Colors.transparent,
                                 Color(0xFF0F1111),
-                              ])),
+
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

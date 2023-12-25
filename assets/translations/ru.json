@@ -18,7 +18,9 @@
   "startWatching" : "Start watching",
   "download" : "Download",
   "trailer" : "Trailer",
-  "basedOnOpenedFilm" : "Based on {} Cast"
+  "basedOnOpenedFilm" : "Based on {} Cast",
+  "libraryTitleDescription" : "The video that you have downloaded will be accessible offline for 30 days, after it ends it will be updated when you are connected to the internet",
+  "myLibrary" : "My Library"
 
 
 }
