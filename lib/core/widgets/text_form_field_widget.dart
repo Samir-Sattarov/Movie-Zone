@@ -31,6 +31,7 @@ class TextFormFieldWidget extends StatelessWidget {
         hintText: hint,
         fillColor: const Color(0xff191B1C),
         filled: true,
+        prefixIcon: leadingIcon,
         contentPadding:
             EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h / 2),
         hintStyle: TextStyle(

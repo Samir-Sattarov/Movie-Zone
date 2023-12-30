@@ -11,4 +11,11 @@ class Assets {
   static const tSearchIcon = "assets/svg/search.svg";
   static const tUserIcon = "assets/svg/user.svg";
 
+
+  // NEED TO DELETE
+
+
+  static const tDisneyLogo = "assets/images/disney.png";
+  static const tDisneyPlusLogo = "assets/images/disney_plus.png";
+
 }

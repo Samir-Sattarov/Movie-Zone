@@ -24,5 +24,7 @@
   "featured" : "Featured",
   "newEpisodes" : "New Episodes",
   "mostWatched" : "Most watched",
-  "data" : "data"
+  "search" : "Search",
+  "genres" : "Genres",
+  "suggestedForYou" : "Suggested for you"
 }

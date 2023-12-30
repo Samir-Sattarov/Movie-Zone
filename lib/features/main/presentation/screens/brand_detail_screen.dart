@@ -194,7 +194,7 @@ class BrandDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 50.h),
+            SizedBox(height: 120.h),
           ],
         ),
       ),

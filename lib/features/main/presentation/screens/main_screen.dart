@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/blur_container.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
+import 'package:movie_zone/features/main/presentation/screens/search_screen.dart';
 import 'package:navigator_scope/navigator_scope.dart';
 
 import '../../../../core/utils/assets.dart';
@@ -21,10 +22,10 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> screens = [
     const HomeScreen(),
+    const SearchScreen(),
     const BrandDetailScreen(
         logoUrl:
             "https://i.pinimg.com/564x/6e/44/d8/6e44d8091bbce3113a6b5ea1af6b7bff.jpg"),
-    Container(),
     Container(),
   ];
 
@@ -97,16 +98,9 @@ class _MainScreenState extends State<MainScreen> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: ShakeY(
-        from: 1,
-        infinite: true,
-        duration: const Duration(seconds: 2),
-        animate: isActive,
-
-        child: SvgPicture.asset(
-          iconPath,
-          color: isActive ? Colors.white : null,
-        ),
+      child: SvgPicture.asset(
+        iconPath,
+        color: isActive ? Colors.white : null,
       ),
     );
   }
