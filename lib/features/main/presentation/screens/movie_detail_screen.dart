@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
-import 'package:movie_zone/features/main/presentation/widget/poster_widget.dart';
+import 'package:movie_zone/core/widgets/poster_widget.dart';
 import 'package:movie_zone/features/main/presentation/widget/trailer_widget.dart';
 import 'package:readmore/readmore.dart';
 
@@ -76,12 +76,12 @@ class MovieDetailScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () => Navigator.pop(context),
-                                child: SvgPicture.asset(Assets.tArrowLeft),
+                                child: SvgPicture.asset(Assets.tArrowLeftIcon),
                               ),
                               const Spacer(),
-                              SvgPicture.asset(Assets.tAddList),
+                              SvgPicture.asset(Assets.tAddListIcon),
                               SizedBox(width: 8.w),
-                              SvgPicture.asset(Assets.tShare),
+                              SvgPicture.asset(Assets.tShareIcon),
                             ],
                           ),
                         ),

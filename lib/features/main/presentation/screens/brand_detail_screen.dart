@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movie_zone/features/main/presentation/widget/poster_widget.dart';
+import 'package:movie_zone/core/widgets/poster_widget.dart';
 
 import '../../../../core/utils/assets.dart';
 
@@ -85,7 +85,7 @@ class BrandDetailScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () => Navigator.pop(context),
-                                child: SvgPicture.asset(Assets.tArrowLeft),
+                                child: SvgPicture.asset(Assets.tArrowLeftIcon),
                               ),
                             ],
                           ),

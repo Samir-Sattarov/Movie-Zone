@@ -11,13 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Movie zone"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+
             SizedBox(
               height: 82.h,
               child: ListView.builder(
@@ -51,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       tag: logoUrl.hashCode,
                       child: BrandWidget(
                         imageForViewUrl:
-                            "https://i.pinimg.com/564x/55/3f/6b/553f6b41975bf39b3022f43c9abc1ef3.jpg",
+                        "https://i.pinimg.com/564x/55/3f/6b/553f6b41975bf39b3022f43c9abc1ef3.jpg",
                         fullLogoUrl: logoUrl,
                         onTap: (p0) {
                           Navigator.push(
@@ -67,14 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
               ),
             ),
+
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

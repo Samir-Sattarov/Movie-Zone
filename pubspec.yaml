@@ -47,6 +47,9 @@ dependencies:
   equatable: ^2.0.5
   readmore: ^2.2.0
   delayed_display: ^2.0.0
+  animate_do: ^3.1.2
+  custom_top_navigator: ^0.0.4
+  navigator_scope: ^1.0.1
 
 dev_dependencies:
   flutter_test:

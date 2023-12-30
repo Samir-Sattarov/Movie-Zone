@@ -1,10 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
-import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
-import 'features/main/presentation/screens/library_screen.dart';
-import 'features/main/presentation/screens/movie_detail_screen.dart';
+import 'package:movie_zone/features/main/presentation/screens/main_screen.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
@@ -14,7 +11,7 @@ class Application extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      child: const HomeScreen(),
+      child: const MainScreen(),
       // child: LibraryScreen(
       //   entity: MovieEntity(
       //     description:
