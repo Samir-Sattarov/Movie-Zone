@@ -5,10 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/blur_container.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
+import 'package:movie_zone/features/main/presentation/screens/library_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/search_screen.dart';
 import 'package:navigator_scope/navigator_scope.dart';
 
 import '../../../../core/utils/assets.dart';
+import '../../domain/entities/movie_entity.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -23,10 +25,10 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
+    const LibraryScreen(),
     const BrandDetailScreen(
         logoUrl:
             "https://i.pinimg.com/564x/6e/44/d8/6e44d8091bbce3113a6b5ea1af6b7bff.jpg"),
-    Container(),
   ];
 
   @override
@@ -39,13 +41,11 @@ class _MainScreenState extends State<MainScreen> {
       //   child: screens[currentIndex],
       // ),
       // extendBody: true,
-      body: NavigatorScope( // A hub of local navigators
-        currentDestination:currentIndex,
+      body: NavigatorScope(
+        currentDestination: currentIndex,
         destinationCount: screens.length,
-
         destinationBuilder: (context, index) {
-          return NestedNavigator( // A local navigator
-            // Create the default page for this navigator
+          return NestedNavigator(
             builder: (context) => screens[index],
           );
         },
@@ -63,20 +63,17 @@ class _MainScreenState extends State<MainScreen> {
                 _bottomNavigationItem(
                   isActive: currentIndex == 0,
                   iconPath: Assets.tHomeIcon,
-                  onTap: () => setState(() => currentIndex =0),
-
+                  onTap: () => setState(() => currentIndex = 0),
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 1,
                   iconPath: Assets.tSearchIcon,
-                  onTap: () => setState(() => currentIndex =1),
-
+                  onTap: () => setState(() => currentIndex = 1),
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 2,
                   iconPath: Assets.tPlayerIcon,
-                  onTap: () => setState(() => currentIndex =2),
-
+                  onTap: () => setState(() => currentIndex = 2),
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 3,
@@ -96,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
     required String iconPath,
     required Function() onTap,
   }) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: SvgPicture.asset(
         iconPath,

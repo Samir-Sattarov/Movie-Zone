@@ -12,18 +12,6 @@ class Application extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       child: const MainScreen(),
-      // child: LibraryScreen(
-      //   entity: MovieEntity(
-      //     description:
-      //         "Oppenheimer is a biographical film that chronicles the life of J. Robert Oppenheimer, a brilliant physicist who was instrumental in developing the atomic bomb during World War II. This film explores Oppenheim... ",
-      //     title: 'Oppenheimer',
-      //     imageUrl:
-      //         'https://movies.universalpictures.com/media/opr-tsr1sheet3-look2-rgb-3-1-1-64545c0d15f1e-1.jpg',
-      //     overall: 100,
-      //     time: '1h 32m',
-      //     createdAt: DateTime.now(),
-      //   ),
-      // ),
       builder: (context, child) {
         return MaterialApp(
           title: 'Movie Zone',
