@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_zone/core/widgets/poster_widget.dart';
+import 'package:movie_zone/core/widgets/posters_view_widget.dart';
 
 import '../../../../core/utils/assets.dart';
 
@@ -97,103 +98,13 @@ class BrandDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 32.h),
-            DelayedDisplay(
-              delay: const Duration(milliseconds: 5),
-              slidingBeginOffset: const Offset(-1, 0),
-              fadeIn: true,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Text(
-                  "featured".tr(),
-                  style: const TextStyle(
-                    color: Color(0xFFEEEFF0),
-                    fontSize: 24,
-                    fontFamily: 'SF Pro Display',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 19.h),
-            Container(
-              height: 200.h,
-              padding: EdgeInsets.only(left: 20.w),
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: const ClampingScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(right: 12.w),
-                    child: DelayedDisplay(
-                      delay: const Duration(milliseconds: 5),
-                      slidingBeginOffset: const Offset(-1, 0),
-                      fadeIn: true,
-                      child: PosterWidget(
-                        width: 158,
-                        height: 200,
-                        hasNewEpisodes: index == 0,
-                        url:
-                            "https://i.pinimg.com/564x/6c/8c/42/6c8c42d7cfbe0afb3d029c42e3054ced.jpg",
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            PostersViewWidget(title:  "featured", movies: []),
+
+
             SizedBox(height: 32.h),
-            DelayedDisplay(
-              delay: const Duration(milliseconds: 40),
-              slidingBeginOffset: const Offset(-1, 0),
-              fadeIn: true,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Text(
-                  "mostWatched".tr(),
-                  style: const TextStyle(
-                    color: Color(0xFFEEEFF0),
-                    fontSize: 24,
-                    fontFamily: 'SF Pro Display',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 19.h),
-            DelayedDisplay(
-              delay: const Duration(milliseconds: 40),
-              slidingBeginOffset: const Offset(-1, 0),
-              fadeIn: true,
-              child: Container(
-                height: 200.h,
-                padding: EdgeInsets.only(left: 20.w),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: 12.w),
-                      child: const DelayedDisplay(
-                        delay: Duration(milliseconds: 5),
-                        slidingBeginOffset: Offset(-1, 0),
-                        fadeIn: true,
-                        child: PosterWidget(
-                          width: 158,
-                          height: 200,
-                          url:
-                              "https://i.pinimg.com/564x/6c/8c/42/6c8c42d7cfbe0afb3d029c42e3054ced.jpg",
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            PostersViewWidget(title:  "mostWatched", movies: []),
+
+
             SizedBox(height: 120.h),
           ],
         ),

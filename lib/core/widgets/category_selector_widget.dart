@@ -7,7 +7,8 @@ import '../../features/main/domain/entities/choice_entity.dart';
 class CategorySelectorWidget extends StatefulWidget {
   final List<ChoiceEntity> listData;
   final Function(String categoryId) onTap;
-  const CategorySelectorWidget({Key? key, required this.listData, required this.onTap})
+  final bool isTransparent;
+  const CategorySelectorWidget({Key? key, required this.listData, required this.onTap,   this.isTransparent = false})
       : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class _CategorySelectorWidgetState extends State<CategorySelectorWidget> {
 
               },
               title: element.title,
-              isActive: index == currentIndex,
+              isActive: index == currentIndex, isTransparent: widget.isTransparent,
             ),
           );
         }),
@@ -43,6 +44,7 @@ class _CategorySelectorWidgetState extends State<CategorySelectorWidget> {
   _item({
     required String title,
     required bool isActive,
+    required bool isTransparent,
     required VoidCallback onTap
   }) {
     return GestureDetector(
@@ -51,7 +53,7 @@ class _CategorySelectorWidgetState extends State<CategorySelectorWidget> {
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36.r),
-          color: !isActive ? const Color(0xFF0F1111) : Colors.white,
+          color: !isActive ? isTransparent ?Colors.transparent :const Color(0xFF0F1111) : Colors.white,
         ),
         child: Text(
           title,
