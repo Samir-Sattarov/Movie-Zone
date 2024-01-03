@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
       //   switchOutCurve: Curves.easeOut,
       //   child: screens[currentIndex],
       // ),
-      // extendBody: true,
+      extendBody: true,
       body: NavigatorScope(
         currentDestination: currentIndex,
         destinationCount: screens.length,
@@ -50,7 +50,6 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
-      extendBody: true,
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),

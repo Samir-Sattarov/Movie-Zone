@@ -40,6 +40,7 @@ class PostersViewWidget extends StatelessWidget {
           delay: const Duration(milliseconds: 40),
           slidingBeginOffset: const Offset(-1, 0),
           fadeIn: true,
+          slidingCurve: Curves.easeInCubic,
           child: SizedBox(
             height: 200.h,
             child: ListView.builder(

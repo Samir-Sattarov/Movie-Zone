@@ -49,7 +49,8 @@ class _CategorySelectorWidgetState extends State<CategorySelectorWidget> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36.r),
