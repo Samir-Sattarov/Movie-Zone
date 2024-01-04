@@ -48,7 +48,7 @@ class ButtonWidget extends StatelessWidget {
 
                 if(iconData != null)  iconData!,
 
-                 SizedBox(width: 5.w),
+                if(iconData != null)   SizedBox(width: 5.w),
                  Text(
                   title,
                   style: TextStyle(

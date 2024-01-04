@@ -87,6 +87,7 @@ class _SignInScreenPartThreeState extends State<SignInScreenPartThree> {
                       ButtonWidget(
                         title: "help".tr(),
                         onTap: () {},
+                        height: 30.h,
                         fontSize: 12.sp,
                         isOutline: true,
                         width: 60.w,

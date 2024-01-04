@@ -13,6 +13,7 @@ import '../../../../core/utils/assets.dart';
 import '../../domain/entities/movie_entity.dart';
 
 class MainScreen extends StatefulWidget {
+  static route() => MaterialPageRoute(builder: (context) => const MainScreen());
   const MainScreen({Key? key}) : super(key: key);
 
   @override

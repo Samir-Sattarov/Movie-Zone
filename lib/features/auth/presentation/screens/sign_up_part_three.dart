@@ -6,21 +6,23 @@ import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/utils/form_validator.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
-import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_three.dart';
+import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_two.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class SignInScreenPartTwo extends StatefulWidget {
+import '../../../main/presentation/screens/main_screen.dart';
+
+class SignUpScreenPartThree extends StatefulWidget {
   static route() => MaterialPageRoute(
-        builder: (context) => const SignInScreenPartTwo(),
+        builder: (context) => const SignUpScreenPartThree(),
       );
-  const SignInScreenPartTwo({Key? key}) : super(key: key);
+  const SignUpScreenPartThree({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreenPartTwo> createState() => _SignInScreenPartTwoState();
+  State<SignUpScreenPartThree> createState() => _SignUpScreenPartThreeState();
 }
 
-class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
+class _SignUpScreenPartThreeState extends State<SignUpScreenPartThree> {
   final TextEditingController controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -40,7 +42,7 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 70.h,
+                    height: 60.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -62,9 +64,8 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                         ButtonWidget(
                           title: "help".tr(),
                           onTap: () {},
-                          height: 30.h,
-
                           fontSize: 12.sp,
+                          height: 30.h,
                           isOutline: true,
                           width: 60.w,
                           borderRadius: BorderRadius.circular(32).r,
@@ -82,7 +83,7 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "enterYourPasswordSubtitle".tr(),
+                    "enterYourPasswordToCreateAccount".tr(),
                     style: TextStyle(
                       color: const Color(0xffB9BFC1),
                       fontSize: 16.sp,
@@ -97,11 +98,11 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                       });
                     },
                     hint: 'enterYourPassword'.tr(),
-                    validator: FormValidator.password,
+                    validator: FormValidator.validateEmail,
                   ),
                   const Spacer(),
                   Text(
-                    "signInPartTwoDescription".tr(),
+                    "signUpPartOneDescription".tr(),
                     style: TextStyle(
                       color: const Color(0xffB9BFC1),
                       fontSize: 16.sp,
@@ -111,7 +112,7 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                   ButtonWidget(
                     title: "continue".tr(),
                     onTap: () {
-                      Navigator.push(context, SignInScreenPartThree.route());
+                      Navigator.pushAndRemoveUntil(context, MainScreen.route(), (route) => false);
                     },
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),
