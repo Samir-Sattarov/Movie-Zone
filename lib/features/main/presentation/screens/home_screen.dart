@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "https://i.pinimg.com/564x/6e/44/d8/6e44d8091bbce3113a6b5ea1af6b7bff.jpg";
                   return Padding(
                     padding: EdgeInsets.only(
-                        right: 12.w, left: index == 0 ? 20.w : 0),
+                        right: 12.w, left: index == 0 ? 20.w : 0,),
                     child: Hero(
                       tag: logoUrl.hashCode,
                       child: BrandWidget(

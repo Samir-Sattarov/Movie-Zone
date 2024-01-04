@@ -33,5 +33,9 @@
   "signUpPartOneDescription" : "By loging in or signing up you agree to Foodlam’s Terms and Condition & Privacy Policies",
   "enterYourEmailToCreateAccount" : "Enter your email to continue to create to your account",
   "createYourPassword" : "Enter your email to continue to create to your account",
-  "enterYourPasswordToCreateAccount" : "Enter your password to continue to create to your account"
+  "enterYourPasswordToCreateAccount" : "Enter your password to continue to create to your account",
+  "brands" : "Brands",
+  "tvSeries" : "TV series",
+  "popularMovies" : "Popular Movies",
+  "sports" : "Sports"
 }

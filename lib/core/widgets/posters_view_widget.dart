@@ -52,13 +52,13 @@ class PostersViewWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 12.w, left: index == 0 ? 20.w:0),
-                  child: const DelayedDisplay(
-                    delay: Duration(milliseconds: 5),
-                    slidingBeginOffset: Offset(-1, 0),
+                  child:   DelayedDisplay(
+                    delay: const Duration(milliseconds: 5),
+                    slidingBeginOffset: const Offset(-1, 0),
                     fadeIn: true,
                     child: PosterWidget(
                       width: 158,
-                      hasNewEpisodes: true,
+                      hasNewEpisodes: index == 0 ?  true : false,
                       url:
                           "https://i.pinimg.com/564x/6c/8c/42/6c8c42d7cfbe0afb3d029c42e3054ced.jpg",
                     ),
