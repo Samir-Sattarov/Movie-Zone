@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movie_zone/core/api/firebase_api.dart';
 import 'package:movie_zone/core/widgets/blur_container.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
@@ -10,6 +11,7 @@ import 'package:movie_zone/features/main/presentation/screens/search_screen.dart
 import 'package:navigator_scope/navigator_scope.dart';
 
 import '../../../../core/utils/assets.dart';
+import '../../../../locator/locator.dart';
 import '../../domain/entities/movie_entity.dart';
 
 class MainScreen extends StatefulWidget {
@@ -63,12 +65,19 @@ class _MainScreenState extends State<MainScreen> {
                 _bottomNavigationItem(
                   isActive: currentIndex == 0,
                   iconPath: Assets.tHomeIcon,
-                  onTap: () => setState(() => currentIndex = 0),
+                  onTap: () {
+                    FirebaseApi(locator()).signIn(email: "testttt@gmail.com", password: "testtt");
+                    setState(() => currentIndex = 0);
+                  },
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 1,
                   iconPath: Assets.tSearchIcon,
-                  onTap: () => setState(() => currentIndex = 1),
+                  onTap: () {
+                    FirebaseApi(locator()).signUp(email: "testttt@gmail.com", password: "testtt");
+
+                    setState(() => currentIndex = 1);
+                  },
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 2,
@@ -78,7 +87,11 @@ class _MainScreenState extends State<MainScreen> {
                 _bottomNavigationItem(
                   isActive: currentIndex == 3,
                   iconPath: Assets.tUserIcon,
-                  onTap: () => setState(() => currentIndex = 3),
+                  onTap: () {
+                    FirebaseApi(locator()).getCurrentUser();
+
+                    setState(() => currentIndex = 3);
+                  },
                 ),
               ],
             ),
