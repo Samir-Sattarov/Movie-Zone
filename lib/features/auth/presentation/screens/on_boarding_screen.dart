@@ -6,6 +6,8 @@ import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_one.dart';
 
+import 'sign_up_part_one.dart';
+
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
 
@@ -54,7 +56,10 @@ class OnBoardingScreen extends StatelessWidget {
                 SizedBox(height: 16.h),
                 ButtonWidget(
                   title: "signUp".tr(),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, SignUpScreenPartOne.route());
+
+                  },
                   isOutline: true,
                 ),
               ],

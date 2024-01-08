@@ -111,7 +111,7 @@ class _SignInScreenPartOneState extends State<SignInScreenPartOne> {
                   ButtonWidget(
                     title: "continue".tr(),
                     onTap: () {
-                      Navigator.push(context, SignInScreenPartTwo.route());
+                      Navigator.push(context, SignInScreenPartTwo.route(email: controller.text));
                     },
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),
