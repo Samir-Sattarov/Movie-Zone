@@ -10,6 +10,8 @@ import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_two.d
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'sign_up_part_two.dart';
+
 class SignUpScreenPartOne extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const SignUpScreenPartOne(),
@@ -96,7 +98,6 @@ class _SignUpScreenPartOneState extends State<SignUpScreenPartOne> {
                       });
                     },
                     hint: 'enterYourName'.tr(),
-                    validator: FormValidator.validateEmail,
                   ),
                   const Spacer(),
                   Text(
@@ -110,7 +111,7 @@ class _SignUpScreenPartOneState extends State<SignUpScreenPartOne> {
                   ButtonWidget(
                     title: "continue".tr(),
                     onTap: () {
-                      Navigator.push(context, SignInScreenPartTwo.route());
+                      Navigator.push(context, SignUpScreenPartTwo.route(name: controller.text));
                     },
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),

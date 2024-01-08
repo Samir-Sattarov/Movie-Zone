@@ -16,14 +16,21 @@ class FirebaseApi {
 
   FirebaseApi(this.secureStorage);
 
-  signUp({required String email, required String password}) async {
+  signUp({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     final credential = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
     final id = credential.user?.uid;
 
     await fireStore.collection(ApiConstants.cUsers).doc(id).set(
-          UserModel.fromEntity(UserEntity.empty(id: id ?? "")).toJson(),
+          UserModel.fromEntity(UserEntity.empty(
+            id: id ?? "",
+            name: name,
+          )).toJson(),
         );
 
     await secureStorage.save(key: StorageKeys.kId, value: id);
@@ -45,7 +52,6 @@ class FirebaseApi {
 
     log((json.data()!).toString());
     final model = UserModel.fromJson(json.data()!);
-
 
     return model;
   }

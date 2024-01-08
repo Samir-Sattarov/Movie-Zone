@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_zone/features/auth/presentation/cubit/auth/auth_cubit.dart';
 
 import '../core/api/firebase_api.dart';
 import '../core/utils/secure_storage.dart';
@@ -6,11 +7,6 @@ import '../core/utils/secure_storage.dart';
 final locator = GetIt.I;
 
 void setup() {
-  // ================ BLoC / Cubit ================ //
-
-  // ================ UseCases ================ //
-
-  // ================ Repository / Datasource ================ //
 
   // ================ Core ================ //
 
@@ -18,6 +14,18 @@ void setup() {
 
   // ================ External ================ //
 
-  locator.registerSingleton(() => FirebaseApi(locator()));
+  locator.registerLazySingleton(() => FirebaseApi(locator()));
+
+  // ================ BLoC / Cubit ================ //
+  locator.registerFactory(() => AuthCubit(locator()));
+
+  // ================ UseCases ================ //
+
+  // ================ Repository / Datasource ================ //
+
+
+
+
+
 
 }

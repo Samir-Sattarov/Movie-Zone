@@ -65,19 +65,12 @@ class _MainScreenState extends State<MainScreen> {
                 _bottomNavigationItem(
                   isActive: currentIndex == 0,
                   iconPath: Assets.tHomeIcon,
-                  onTap: () {
-                    FirebaseApi(locator()).signIn(email: "testttt@gmail.com", password: "testtt");
-                    setState(() => currentIndex = 0);
-                  },
+                  onTap: () => setState(() => currentIndex = 0),
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 1,
                   iconPath: Assets.tSearchIcon,
-                  onTap: () {
-                    FirebaseApi(locator()).signUp(email: "testttt@gmail.com", password: "testtt");
-
-                    setState(() => currentIndex = 1);
-                  },
+                  onTap: () => setState(() => currentIndex = 1),
                 ),
                 _bottomNavigationItem(
                   isActive: currentIndex == 2,
@@ -87,11 +80,7 @@ class _MainScreenState extends State<MainScreen> {
                 _bottomNavigationItem(
                   isActive: currentIndex == 3,
                   iconPath: Assets.tUserIcon,
-                  onTap: () {
-                    FirebaseApi(locator()).getCurrentUser();
-
-                    setState(() => currentIndex = 3);
-                  },
+                  onTap: () => setState(() => currentIndex = 3),
                 ),
               ],
             ),

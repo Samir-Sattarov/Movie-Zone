@@ -17,11 +17,11 @@ class UserEntity extends Equatable {
     required this.watchedMovies,
   });
 
-  factory UserEntity.empty({String id = ""}) {
+  factory UserEntity.empty({String id = "", String name = ""}) {
     return UserEntity(
       id: id,
       email: "",
-      name: "",
+      name:name,
       phone: "",
       watchedMovies: const [],
     );

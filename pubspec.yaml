@@ -55,6 +55,8 @@ dependencies:
   cloud_firestore: ^4.14.0
   uuid: ^4.2.2
   flutter_secure_storage: ^9.0.0
+  another_flushbar: ^1.12.30
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +85,7 @@ flutter:
     - assets/images/
     - assets/translations/
     - assets/svg/
+    - assets/animations/
     - assets/
   #   - images/a_dot_ham.jpeg
 
@@ -142,6 +145,10 @@ spider:
       class_name: Images
       prefix: t
       types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
+    - path: assets/animations
+      class_name: Animations
+      prefix: t
+      types: [ .json]
     - path: assets/svg
       class_name: Svg
       prefix: t

@@ -11,11 +11,15 @@ import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_two.d
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'sign_up_part_three.dart';
+
 class SignUpScreenPartTwo extends StatefulWidget {
-  static route() => MaterialPageRoute(
-        builder: (context) => const SignUpScreenPartTwo(),
+  static route({required String name}) => MaterialPageRoute(
+        builder: (context) => SignUpScreenPartTwo(name: name),
       );
-  const SignUpScreenPartTwo({Key? key}) : super(key: key);
+
+  final String name;
+  const SignUpScreenPartTwo({Key? key, required this.name}) : super(key: key);
 
   @override
   State<SignUpScreenPartTwo> createState() => _SignUpScreenPartTwoState();
@@ -27,7 +31,6 @@ class _SignUpScreenPartTwoState extends State<SignUpScreenPartTwo> {
 
   @override
   Widget build(BuildContext context) {
-
     return KeyboardDismissOnTap(
       child: Scaffold(
         body: Form(
@@ -92,9 +95,7 @@ class _SignUpScreenPartTwoState extends State<SignUpScreenPartTwo> {
                   TextFormFieldWidget(
                     controller: controller,
                     onSubmit: (p0) {
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     hint: 'enterYourEmail'.tr(),
                     validator: FormValidator.validateEmail,
@@ -111,7 +112,10 @@ class _SignUpScreenPartTwoState extends State<SignUpScreenPartTwo> {
                   ButtonWidget(
                     title: "continue".tr(),
                     onTap: () {
-                      Navigator.push(context, SignInScreenPartThree.route());
+                      Navigator.push(
+                          context,
+                          SignUpScreenPartThree.route(
+                              name: widget.name, email: controller.text,));
                     },
                     isEnabled: _formKey.currentState?.validate() ?? false,
                   ),

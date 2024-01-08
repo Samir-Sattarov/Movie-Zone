@@ -14,6 +14,7 @@ class SignInScreenPartTwo extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const SignInScreenPartTwo(),
       );
+
   const SignInScreenPartTwo({Key? key}) : super(key: key);
 
   @override
@@ -26,7 +27,6 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
 
   @override
   Widget build(BuildContext context) {
-
     return KeyboardDismissOnTap(
       child: Scaffold(
         body: Form(
@@ -63,7 +63,6 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                           title: "help".tr(),
                           onTap: () {},
                           height: 30.h,
-
                           fontSize: 12.sp,
                           isOutline: true,
                           width: 60.w,
@@ -92,9 +91,7 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                   TextFormFieldWidget(
                     controller: controller,
                     onSubmit: (p0) {
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     hint: 'enterYourPassword'.tr(),
                     validator: FormValidator.password,
