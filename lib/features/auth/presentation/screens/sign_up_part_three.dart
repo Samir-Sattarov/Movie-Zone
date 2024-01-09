@@ -125,7 +125,7 @@ class _SignUpScreenPartThreeState extends State<SignUpScreenPartThree> {
                         SizedBox(height: 24.h),
                         TextFormFieldWidget(
                           controller: controllerPassword,
-                          onSubmit: (p0) {
+                          onChanged: (p0) {
                             setState(() {});
                           },
                           hint: 'enterYourPassword'.tr(),

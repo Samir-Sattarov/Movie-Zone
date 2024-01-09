@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/utils/form_validator.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
-import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_three.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../../core/widgets/error_flash_bar.dart';
@@ -113,7 +110,7 @@ class _SignInScreenPartTwoState extends State<SignInScreenPartTwo> {
                       SizedBox(height: 24.h),
                       TextFormFieldWidget(
                         controller: controllerPassword,
-                        onSubmit: (p0) {
+                        onChanged: (p0) {
                           setState(() {});
                         },
                         hint: 'enterYourPassword'.tr(),

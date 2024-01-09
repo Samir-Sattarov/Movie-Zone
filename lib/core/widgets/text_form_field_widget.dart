@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextFormFieldWidget extends StatelessWidget {
   final String hint;
   final Function(String)? onSubmit;
+  final Function(String)? onChanged;
   final Widget? leadingIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -12,6 +13,7 @@ class TextFormFieldWidget extends StatelessWidget {
     required this.controller,
     required this.hint,
     this.onSubmit,
+    this.onChanged,
     this.leadingIcon,
     this.validator,
   }) : super(key: key);
@@ -21,6 +23,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      onChanged: (value) => onSubmit?.call(value),
       onFieldSubmitted: (value) => onSubmit?.call(value),
       style: TextStyle(
         fontSize: 14.sp,

@@ -92,7 +92,7 @@ class _SignUpScreenPartOneState extends State<SignUpScreenPartOne> {
                   SizedBox(height: 24.h),
                   TextFormFieldWidget(
                     controller: controller,
-                    onSubmit: (p0) {
+                    onChanged: (p0) {
                       setState(() {
 
                       });

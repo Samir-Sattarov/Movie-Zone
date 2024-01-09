@@ -94,7 +94,7 @@ class _SignUpScreenPartTwoState extends State<SignUpScreenPartTwo> {
                   SizedBox(height: 24.h),
                   TextFormFieldWidget(
                     controller: controller,
-                    onSubmit: (p0) {
+                    onChanged: (p0) {
                       setState(() {});
                     },
                     hint: 'enterYourEmail'.tr(),
