@@ -23,7 +23,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
-      onChanged: (value) => onSubmit?.call(value),
+      onChanged: (value) => onChanged?.call(value),
       onFieldSubmitted: (value) => onSubmit?.call(value),
       style: TextStyle(
         fontSize: 14.sp,
