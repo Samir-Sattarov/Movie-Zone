@@ -1,8 +1,10 @@
 class ApiConstants {
 
 
-  static const uploads = "uploads";
-  static const baseApiUrl = "base";
+  static const baseApiUrl = "https://api.themoviedb.org/3/";
+
+
+  // Firebase
   static const cUsers = "users";
 
 
