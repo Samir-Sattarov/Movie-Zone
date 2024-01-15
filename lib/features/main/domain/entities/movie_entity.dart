@@ -1,29 +1,29 @@
 import 'package:equatable/equatable.dart';
 
+
 class MovieEntity extends Equatable {
+  final int id;
   final String title;
   final String description;
-  final String trailerUrl;
-  final String time;
   final String imageUrl;
   final int overall;
-  final DateTime createdAt;
+  final DateTime releaseDate;
 
   const MovieEntity({
+    required this.id,
     required this.title,
-    this.trailerUrl = "",
     required this.description,
-    required this.time,
     required this.imageUrl,
-    required this.createdAt,
+    required this.releaseDate,
     required this.overall,
   });
 
   @override
   List<Object?> get props => [
+        id,
         description,
         title,
-        createdAt,
+        releaseDate,
         overall,
         imageUrl,
       ];

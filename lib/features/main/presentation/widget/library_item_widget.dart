@@ -38,7 +38,7 @@ class LibraryItemWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    entity.time,
+                    entity.releaseDate.toString(),
                     style: TextStyle(
                       color: const Color(0xFFB9BFC1),
                       fontSize: 14.sp,
@@ -48,7 +48,7 @@ class LibraryItemWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 12.w),
                   Text(
-                    "${entity.createdAt.day}/${entity.createdAt.month}/${entity.createdAt.year}",
+                    "${entity.releaseDate.day}/${entity.releaseDate.month}/${entity.releaseDate.year}",
                     style: TextStyle(
                       color: const Color(0xFFB9BFC1),
                       fontSize: 14.sp,
