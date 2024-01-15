@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_zone/core/entities/app_error.dart';
 
+import '../../../../core/entities/no_params.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repository/auth_repository.dart';
 
@@ -28,6 +29,18 @@ class RegisterUsecase extends UseCase<bool, RegisterUsecaseParams> {
       authRepository.signUp(
           email: params.email, password: params.password, name: params.name,);
 }
+
+
+class LogOutUsecase extends UseCase<void, NoParams> {
+  final AuthRepository authRepository;
+
+  LogOutUsecase(this.authRepository);
+
+  @override
+  Future<Either<AppError, void>> call(NoParams params) =>
+      authRepository.logOut();
+}
+
 
 // ================ PARAMS ================ //
 

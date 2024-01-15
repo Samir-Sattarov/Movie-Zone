@@ -50,4 +50,28 @@ class AuthRepositoryImpl extends AuthRepository {
       );
     }
   }
+
+
+  @override
+  Future<Either<AppError, bool>> checkActiveSession() async {
+    try {
+
+      final response = await localDataSource.checkActiveSession();
+      return Right(response);
+    } catch (error) {
+      return Left(
+        AppError(
+          appErrorType: AppErrorType.api,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> logOut() async {
+    await localDataSource.logOut();
+    return const Right(null);
+  }
+
 }

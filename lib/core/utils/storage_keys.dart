@@ -1,4 +1,4 @@
 class StorageKeys {
 
-  static const kId = "userId";
+  static const kToken = "token";
 }

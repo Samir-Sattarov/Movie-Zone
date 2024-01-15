@@ -7,51 +7,53 @@ import 'package:movie_zone/features/auth/domain/repository/auth_repository.dart'
 import 'package:movie_zone/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:movie_zone/features/auth/presentation/cubit/auth/auth_cubit.dart';
 
-
 import 'package:http/http.dart' as http;
 import '../core/api/firebase_api.dart';
 import '../core/utils/secure_storage.dart';
+import '../features/auth/domain/usecases/session_usecases.dart';
+import '../features/auth/presentation/cubit/session/session_cubit.dart';
 
 final locator = GetIt.I;
 
 void setup() {
-
   // ================ Core ================ //
 
   locator.registerLazySingleton(() => SecureStorage());
   locator.registerLazySingleton(() => http.Client());
-  locator.registerLazySingleton<ApiClient>(() => ApiClientImpl(locator(), locator()));
+  locator.registerLazySingleton<ApiClient>(
+      () => ApiClientImpl(locator(), locator()));
 
   // ================ External ================ //
 
   locator.registerLazySingleton(() => FirebaseApi(locator()));
 
   // ================ BLoC / Cubit ================ //
-  locator.registerFactory(() => AuthCubit(locator(),locator()));
+  locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
+  locator.registerFactory(() => SessionCubit(locator()));
 
   // ================ UseCases ================ //
-
 
   // ================ AUTH ================ //
 
   locator.registerLazySingleton(() => LoginUsecase(locator()));
   locator.registerLazySingleton(() => RegisterUsecase(locator()));
+  locator.registerLazySingleton(() => LogOutUsecase(locator()));
+  locator.registerLazySingleton(() => CheckActiveSession(locator()));
 
 
 
 
   // ================ Repository / Datasource ================ //
 
-
   // ================ REPOSITORY ================ //
 
-  locator.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(locator(), locator()));
-
+  locator.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(locator(), locator()));
 
   // ================ DATASOURCE ================ //
 
-  locator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(locator()));
-  locator.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(locator()));
-
-
+  locator.registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(locator()));
+  locator.registerLazySingleton<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImpl(locator()));
 }

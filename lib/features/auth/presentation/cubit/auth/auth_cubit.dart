@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/api/firebase_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/entities/no_params.dart';
 import '../../../domain/usecases/auth_usecases.dart';
 
 part 'auth_state.dart';
@@ -10,7 +11,8 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final LoginUsecase _loginUsecase;
   final RegisterUsecase _registerUsecase;
-  AuthCubit(this._loginUsecase, this._registerUsecase) : super(AuthInitial());
+  final LogOutUsecase _logOutUsecase;
+  AuthCubit(this._loginUsecase, this._registerUsecase, this._logOutUsecase) : super(AuthInitial());
 
   signIn({required String email, required String password}) async {
     emit(AuthLoading());
@@ -23,6 +25,10 @@ class AuthCubit extends Cubit<AuthState> {
       (r) => emit(AuthLoginSuccess()),
     );
   }
+
+
+  logOut()async => await _logOutUsecase.call(NoParams());
+
 
   signUp({
     required String email,

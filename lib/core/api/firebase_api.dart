@@ -33,7 +33,7 @@ class FirebaseApi {
           )).toJson(),
         );
 
-    await secureStorage.save(key: StorageKeys.kId, value: id);
+    await secureStorage.save(key: StorageKeys.kToken, value: id);
   }
 
   signIn({required String email, required String password}) async {
@@ -41,11 +41,11 @@ class FirebaseApi {
         await auth.signInWithEmailAndPassword(email: email, password: password);
     final id = credential.user?.uid;
 
-    await secureStorage.save(key: StorageKeys.kId, value: id);
+    await secureStorage.save(key: StorageKeys.kToken, value: id);
   }
 
   Future<UserModel> getCurrentUser() async {
-    final userId = await secureStorage.get(key: StorageKeys.kId);
+    final userId = await secureStorage.get(key: StorageKeys.kToken);
 
     final json =
         await fireStore.collection(ApiConstants.cUsers).doc(userId).get();

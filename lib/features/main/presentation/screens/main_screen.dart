@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/api/firebase_api.dart';
@@ -12,6 +13,8 @@ import 'package:navigator_scope/navigator_scope.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../locator/locator.dart';
+import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
+import '../../../auth/presentation/screens/on_boarding_screen.dart';
 import '../../domain/entities/movie_entity.dart';
 
 class MainScreen extends StatefulWidget {
