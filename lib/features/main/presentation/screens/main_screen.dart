@@ -16,6 +16,7 @@ import '../../../../locator/locator.dart';
 import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
 import '../../../auth/presentation/screens/on_boarding_screen.dart';
 import '../../domain/entities/movie_entity.dart';
+import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const MainScreen());
@@ -32,9 +33,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const SearchScreen(),
     const LibraryScreen(),
-    const BrandDetailScreen(
-        logoUrl:
-            "https://i.pinimg.com/564x/6e/44/d8/6e44d8091bbce3113a6b5ea1af6b7bff.jpg"),
+    const ProfileScreen(),
   ];
 
   @override
