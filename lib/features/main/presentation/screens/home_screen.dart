@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_zone/core/api/api_constants.dart';
+import 'package:movie_zone/core/utils/extentions.dart';
 import 'package:movie_zone/core/widgets/category_selector_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
@@ -78,6 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         BlocBuilder<MoviesCubit, MoviesState>(
                           builder: (context, state) {
+
+                            print("state $state");
                             if (state is MoviesLoaded) {
                               final movies = state.results.movies;
                               final len = movies.length;
@@ -86,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "${ApiConstants.imageApiUrl}${movie.imageUrl}",
                                 fit: BoxFit.cover,
                                 width: MediaQuery.of(context).size.width,
-                              );
+                              )..preload();
                             }
                             return const Center(
                               child: CircularProgressIndicator(

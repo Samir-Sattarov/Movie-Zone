@@ -8,7 +8,6 @@ import 'package:movie_zone/features/main/domain/repository/main_repository.dart'
 
 import '../../domain/entities/movie_results_entity.dart';
 
-
 class MainRepositoryImpl extends MainRepository {
   final MainRemoteDataSource remoteDataSource;
 

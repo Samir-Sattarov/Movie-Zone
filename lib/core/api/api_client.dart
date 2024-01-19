@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:movie_zone/core/api/api_constants.dart';
 import 'package:movie_zone/core/api/api_exceptions.dart';
@@ -21,7 +22,7 @@ class ApiClientImpl extends ApiClient {
 
   @override
   Future get(String path, Map<String, dynamic> params) async {
-    String? token = await localDataSource.getSessionId();
+    String? token = await localDataSource.getToken();
 
 
     final Map<String, String> header = {
@@ -38,7 +39,7 @@ class ApiClientImpl extends ApiClient {
 
   @override
   Future delete(String path) async {
-    String? token = await localDataSource.getSessionId();
+    String? token = await localDataSource.getToken();
 
     final Map<String, String> header = {
       "Authorization": "Bearer $token",
@@ -54,7 +55,7 @@ class ApiClientImpl extends ApiClient {
 
   @override
   Future patch(String path, Map<String, dynamic> data) async {
-    String? token = await localDataSource.getSessionId();
+    String? token = await localDataSource.getToken();
 
     final Map<String, String> header = {
       "Authorization": "Bearer $token",
@@ -71,7 +72,7 @@ class ApiClientImpl extends ApiClient {
 
   @override
   Future post(String path, Map<String, dynamic> data) async {
-    String? token = await localDataSource.getSessionId();
+    String? token = await localDataSource.getToken();
 
     final Map<String, String> header = {
       "Authorization": "Bearer $token",
@@ -87,6 +88,7 @@ class ApiClientImpl extends ApiClient {
   }
 
   _errorHandler(Response response) {
+    // debugPrint("Response status code ${response.statusCode} ${response.request?.url} ${response.request?.headers.toString()}");
     if (response.statusCode == 200) {
       return json.decode(utf8.decode(response.bodyBytes));
     } else if (response.statusCode == 400 || response.statusCode == 404) {
