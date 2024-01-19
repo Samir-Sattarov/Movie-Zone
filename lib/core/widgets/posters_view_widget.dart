@@ -1,9 +1,11 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/core/api/api_constants.dart';
+import 'package:movie_zone/core/widgets/loading_widget.dart';
 import 'package:movie_zone/core/widgets/poster_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 
@@ -34,9 +36,9 @@ class _PostersViewWidgetState extends State<PostersViewWidget> {
             fadeIn: true,
             child: Text(
               widget.title.tr(),
-              style: const TextStyle(
-                color: Color(0xFFEEEFF0),
-                fontSize: 24,
+              style: TextStyle(
+                color: const Color(0xFFEEEFF0),
+                fontSize: 24.sp,
                 fontFamily: 'SF Pro Display',
                 fontWeight: FontWeight.w700,
                 height: 0,
@@ -45,40 +47,46 @@ class _PostersViewWidgetState extends State<PostersViewWidget> {
           ),
         ),
         SizedBox(height: 19.h),
-        DelayedDisplay(
-          delay: const Duration(milliseconds: 40),
-          slidingBeginOffset: const Offset(-1, 0),
-          fadeIn: true,
-          slidingCurve: Curves.easeInCubic,
-          child: SizedBox(
-            height: 200.h,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              physics: const ClampingScrollPhysics(),
-              itemCount: widget.movies.length,
-              itemBuilder: (context, index) {
-                final movie = widget.movies[index];
+        if (widget.movies.isEmpty)
+          const Center(
+              child: LoadingWidget(
+            size: 100,
+          )),
+        if (widget.movies.isNotEmpty)
+          DelayedDisplay(
+            delay: const Duration(milliseconds: 40),
+            slidingBeginOffset: const Offset(-1, 0),
+            fadeIn: true,
+            slidingCurve: Curves.easeInCubic,
+            child: SizedBox(
+              height: 200.h,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                physics: const ClampingScrollPhysics(),
+                itemCount: widget.movies.length,
+                itemBuilder: (context, index) {
+                  final movie = widget.movies[index];
 
-                final imageUrl = "${ApiConstants.imageApiUrl}${movie.imageUrl}";
-                return Padding(
-                  padding:
-                      EdgeInsets.only(right: 12.w, left: index == 0 ? 20.w : 0),
-                  child: DelayedDisplay(
-                    delay: const Duration(milliseconds: 5),
-                    slidingBeginOffset: const Offset(-1, 0),
-                    fadeIn: true,
+                  final imageUrl =
+                      "${ApiConstants.imageApiUrl}${movie.imageUrl}";
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        right: 12.w, left: index == 0 ? 20.w : 0),
                     child: PosterWidget(
                       width: 158,
                       hasNewEpisodes: false,
                       url: imageUrl,
-                    ),
-                  ),
-                );
-              },
+                    )
+                        .animate()
+                        .fade(duration: 500.ms)
+                        .slideX(curve: Curves.easeInOutQuad)
+                        .slideY(),
+                  );
+                },
+              ),
             ),
           ),
-        ),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/blur_container.dart';
@@ -68,7 +69,10 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ],
             ),
-          ),
+          ).animate().slide(
+              begin: const Offset(0, 2),
+              end: const Offset(0, 0),
+              duration: const Duration(milliseconds: 250),),
         ),
       ),
     );

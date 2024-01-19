@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_zone/core/utils/extentions.dart';
 
 class PosterWidget extends StatelessWidget {
   final String url;
@@ -24,7 +25,7 @@ class PosterWidget extends StatelessWidget {
         image: DecorationImage(
           image: NetworkImage(
             url,
-          ),
+          )..preload(),
           fit: BoxFit.cover,
         ),
       ),
