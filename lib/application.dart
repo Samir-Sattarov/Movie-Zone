@@ -39,9 +39,17 @@ class _ApplicationState extends State<Application> {
     secureStorage = locator();
     currentUserCubit = locator();
 
+    initalize();
     super.initState();
   }
 
+  initalize() async {
+    await SecureStorage().save(
+      key: StorageKeys.kToken,
+      value:
+          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

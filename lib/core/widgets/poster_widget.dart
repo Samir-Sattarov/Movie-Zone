@@ -22,6 +22,7 @@ class PosterWidget extends StatelessWidget {
       height: height.h,
       width: width.h,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
         image: DecorationImage(
           image: NetworkImage(
             url,

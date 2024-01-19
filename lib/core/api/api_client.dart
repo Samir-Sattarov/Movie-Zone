@@ -88,7 +88,7 @@ class ApiClientImpl extends ApiClient {
   }
 
   _errorHandler(Response response) {
-    // debugPrint("Response status code ${response.statusCode} ${response.request?.url} ${response.request?.headers.toString()}");
+    debugPrint("Response status code ${response.statusCode} ${response.request?.url} ${response.request?.headers.toString()}");
     if (response.statusCode == 200) {
       return json.decode(utf8.decode(response.bodyBytes));
     } else if (response.statusCode == 400 || response.statusCode == 404) {
