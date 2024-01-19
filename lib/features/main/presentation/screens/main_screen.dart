@@ -44,6 +44,7 @@ class _MainScreenState extends State<MainScreen> {
           child: BlurContainer(
             blur: 30,
             height: 70.h,
+             color: Colors.white.withOpacity(0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -87,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
       onTap: onTap,
       child: SvgPicture.asset(
         iconPath,
-        color: isActive ? Colors.white : null,
+        color: isActive ? Colors.white : Colors.white30,
       ),
     );
   }
