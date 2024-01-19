@@ -38,5 +38,14 @@
   "tvSeries" : "TV series",
   "popularMovies" : "Popular Movies",
   "sports" : "Sports",
-  "discover" : "Discover"
+  "discover" : "Discover",
+  "settings" : "Settings",
+  "others" : "Others",
+  "language" : "language",
+  "notification" : "notification",
+  "manageDownload" : "manageDownload",
+  "manageDevices" : "manageDevices",
+  "history" : "history",
+  "ratings" : "ratings",
+  "logOut" : "logOut"
 }

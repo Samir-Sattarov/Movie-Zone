@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () {},
             ),
             SizedBox(height: 28.h),
-            _categoryWidget("Others"),
+            _categoryWidget("others"),
             ProfileItemWidget(
               title: 'history',
               onTap: () {},

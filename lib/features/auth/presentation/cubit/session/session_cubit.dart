@@ -17,7 +17,6 @@ class SessionCubit extends Cubit<SessionState> {
 
 
 
-      print("r $r" );
       if(r) {
         emit(SessionActive());
       }else {

@@ -8,6 +8,7 @@ class LibraryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dt = DateTime.parse(entity.releaseDate);
     return SizedBox(
       height: 100.h,
       child: Row(
@@ -38,7 +39,7 @@ class LibraryItemWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    entity.releaseDate.toString(),
+                    "${dt.day}/${dt.month}/${dt.year}",
                     style: TextStyle(
                       color: const Color(0xFFB9BFC1),
                       fontSize: 14.sp,
@@ -46,17 +47,7 @@ class LibraryItemWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(width: 12.w),
-                  Text(
-                    "asdfadf",
-                    // "${entity.releaseDate.day}/${entity.releaseDate.month}/${entity.releaseDate.year}",
-                    style: TextStyle(
-                      color: const Color(0xFFB9BFC1),
-                      fontSize: 14.sp,
-                      fontFamily: 'SF Pro Display',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+
                 ],
               ),
             ],

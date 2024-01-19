@@ -29,7 +29,6 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   Future<bool> checkActiveSession() async {
     final response = await secureStorage.get(key: StorageKeys.kToken);
 
-    print("response $response");
     if (response == null) {
       return false;
     }

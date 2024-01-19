@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +31,7 @@ class ProfileItemWidget extends StatelessWidget {
               if(prefix != null)  prefix!,
               if(prefix != null)  SizedBox(width: 6.w),
               Text(
-                title,
+                title.tr(),
                 style:  TextStyle(
                   color: const Color(0xFFEEEFF0),
                   fontSize: 16.sp,

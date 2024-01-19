@@ -50,7 +50,6 @@ class FirebaseApi {
     final json =
         await fireStore.collection(ApiConstants.cUsers).doc(userId).get();
 
-    log((json.data()!).toString());
     final model = UserModel.fromJson(json.data()!);
 
     return model;
