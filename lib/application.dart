@@ -10,6 +10,7 @@ import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.
 import 'core/utils/secure_storage.dart';
 import 'features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'features/auth/presentation/cubit/session/session_cubit.dart';
+import 'features/main/presentation/cubit/current_user/current_user_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'features/main/presentation/screens/main_screen.dart';
 import 'locator/locator.dart';
@@ -27,6 +28,7 @@ class _ApplicationState extends State<Application> {
   late MoviesCubit moviesCubit;
   late PopularMoviesCubit popularMoviesCubit;
   late SecureStorage secureStorage;
+  late CurrentUserCubit currentUserCubit;
 
   @override
   void initState() {
@@ -35,17 +37,11 @@ class _ApplicationState extends State<Application> {
     popularMoviesCubit = locator();
     sessionCubit = locator();
     secureStorage = locator();
+    currentUserCubit = locator();
 
-    initialize();
     super.initState();
   }
 
-  initialize() async {
-    await secureStorage.save(
-        key: StorageKeys.kToken,
-        value:
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,24 +50,24 @@ class _ApplicationState extends State<Application> {
         BlocProvider.value(value: authCubit),
         BlocProvider.value(value: moviesCubit),
         BlocProvider.value(value: popularMoviesCubit),
+        BlocProvider.value(value: currentUserCubit),
         BlocProvider.value(value: sessionCubit..checkSession()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
-        child: const MainScreen(),
-        // child: BlocBuilder<SessionCubit, SessionState>(
-        //   bloc: BlocProvider.of<SessionCubit>(context)..checkSession() ,
-          // builder: (context, state) {
-          //   if (state is SessionActive) {
-          //     return const MainScreen();
-          //   } else if (state is SessionDisabled) {
-          //     return const OnBoardingScreen();
-          //   }
-          //
-          //   return const LoadingWidget();
-          // },
-        // ),
+        child: BlocBuilder<SessionCubit, SessionState>(
+          // bloc: BlocProvider.of<SessionCubit>(context)..checkSession(),
+          builder: (context, state) {
+            if (state is SessionActive) {
+              return const MainScreen();
+            } else if (state is SessionDisabled) {
+              return const OnBoardingScreen();
+            }
+
+            return const LoadingWidget();
+          },
+        ),
         builder: (context, child) {
           return MaterialApp(
             title: 'Movie Zone',

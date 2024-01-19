@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:delayed_display/delayed_display.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -24,22 +26,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ChoiceEntity> listChoses = const [
-    ChoiceEntity(
-      title: "All",
-      categoryId: '',
-    ),
-    ChoiceEntity(
-      title: "TV Series",
-      categoryId: '',
-    ),
-    ChoiceEntity(
-      title: "Actions",
-      categoryId: '',
-    ),
-    ChoiceEntity(
-      title: "Asian",
-      categoryId: '',
-    ),
+    // ChoiceEntity(
+    //   title: "All",
+    //   categoryId: '',
+    // ),
+    // ChoiceEntity(
+    //   title: "TV Series",
+    //   categoryId: '',
+    // ),
+    // ChoiceEntity(
+    //   title: "Actions",
+    //   categoryId: '',
+    // ),
+    // ChoiceEntity(
+    //   title: "Asian",
+    //   categoryId: '',
+    // ),
   ];
 
   @override
@@ -73,10 +75,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: Stack(
                       children: [
-                        Image.network(
-                          "https://movies.universalpictures.com/media/opr-tsr1sheet3-look2-rgb-3-1-1-64545c0d15f1e-1.jpg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width,
+                        BlocBuilder<MoviesCubit, MoviesState>(
+                          builder: (context, state) {
+                            if (state is MoviesLoaded) {
+                              final movies = state.results.movies;
+                              final len = movies.length;
+                              final movie = movies[Random().nextInt(len)];
+                              return Image.network(
+                                "${ApiConstants.imageApiUrl}${movie.imageUrl}",
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width,
+                              );
+                            }
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.red,
+                              ),
+                            );
+                          },
                         ),
                         Container(
                           decoration: const BoxDecoration(
@@ -125,13 +141,18 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocBuilder<MoviesCubit, MoviesState>(
               builder: (context, state) {
                 if (state is MoviesLoaded) {
+                  final movies = state.results.movies;
+
                   return PostersViewWidget(
                     title: "discover",
-                    movies: state.results.movies,
+                    movies: movies,
                   );
                 }
 
-                return const SizedBox();
+                return const PostersViewWidget(
+                  title: "discover",
+                  movies: [],
+                );
               },
             ),
 
@@ -146,7 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                return const SizedBox();
+                return const PostersViewWidget(
+                  title: "popularMovies",
+                  movies: [],
+                );
               },
             ),
 

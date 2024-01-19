@@ -9,6 +9,10 @@ import 'package:movie_zone/features/auth/presentation/screens/sign_in_part_one.d
 import 'sign_up_part_one.dart';
 
 class OnBoardingScreen extends StatelessWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const OnBoardingScreen(),
+      );
+
   const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
@@ -58,7 +62,6 @@ class OnBoardingScreen extends StatelessWidget {
                   title: "signUp".tr(),
                   onTap: () {
                     Navigator.push(context, SignUpScreenPartOne.route());
-
                   },
                   isOutline: true,
                 ),

@@ -6,6 +6,8 @@ import 'package:movie_zone/locator/locator.dart';
 import 'package:uuid/uuid.dart';
 
 import 'application.dart';
+import 'core/utils/secure_storage.dart';
+import 'core/utils/storage_keys.dart';
 import 'firebase_options.dart';
 
 const uuid = Uuid();
@@ -25,6 +27,12 @@ void main() async {
 
 
 
+
+  await SecureStorage().save(
+    key: StorageKeys.kToken,
+    value:
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
+  );
 
   setup();
 

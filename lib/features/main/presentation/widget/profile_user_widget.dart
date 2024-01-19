@@ -13,7 +13,7 @@ class ProfileUserWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         height: 72.h,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_zone/core/entities/no_params.dart';
 import 'package:movie_zone/features/main/domain/entities/movie_results_entity.dart';

@@ -1,21 +1,12 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_zone/core/api/firebase_api.dart';
 import 'package:movie_zone/core/widgets/blur_container.dart';
-import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/home_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/library_screen.dart';
 import 'package:movie_zone/features/main/presentation/screens/search_screen.dart';
-import 'package:navigator_scope/navigator_scope.dart';
 
 import '../../../../core/utils/assets.dart';
-import '../../../../locator/locator.dart';
-import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
-import '../../../auth/presentation/screens/on_boarding_screen.dart';
-import '../../domain/entities/movie_entity.dart';
 import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -39,22 +30,13 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: AnimatedSwitcher(
-      //   duration: const Duration(milliseconds: 300),
-      //   switchInCurve: Curves.easeIn,
-      //   switchOutCurve: Curves.easeOut,
-      //   child: screens[currentIndex],
-      // ),
-      extendBody: true,
-      body: NavigatorScope(
-        currentDestination: currentIndex,
-        destinationCount: screens.length,
-        destinationBuilder: (context, index) {
-          return NestedNavigator(
-            builder: (context) => screens[index],
-          );
-        },
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeOut,
+        child: screens[currentIndex],
       ),
+      extendBody: true,
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),

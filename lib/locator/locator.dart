@@ -16,6 +16,8 @@ import '../core/api/firebase_api.dart';
 import '../core/utils/secure_storage.dart';
 import '../features/auth/domain/usecases/session_usecases.dart';
 import '../features/auth/presentation/cubit/session/session_cubit.dart';
+import '../features/main/domain/usecases/user_usecase.dart';
+import '../features/main/presentation/cubit/current_user/current_user_cubit.dart';
 import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 
@@ -41,6 +43,9 @@ void setup() {
   locator.registerFactory(() => MoviesCubit(locator()));
   locator.registerFactory(() => PopularMoviesCubit(locator()));
 
+  locator.registerFactory(() => CurrentUserCubit(locator()));
+
+
   // ================ UseCases ================ //
 
   // ================ AUTH ================ //
@@ -54,6 +59,10 @@ void setup() {
 
   locator.registerLazySingleton(() => GetMoviesUsecase(locator()));
   locator.registerLazySingleton(() => GetPopularMoviesUsecase(locator()));
+
+  // ================ User ================ //
+
+  locator.registerLazySingleton(() => GetCurrentUserUsecase(locator()));
 
   // ================ Repository / Datasource ================ //
 
@@ -75,5 +84,5 @@ void setup() {
       () => AuthLocalDataSourceImpl(locator()));
 
   locator.registerLazySingleton<MainRemoteDataSource>(
-      () => MainRemoteDataSourceImpl(locator()));
+      () => MainRemoteDataSourceImpl(locator(), locator()));
 }
