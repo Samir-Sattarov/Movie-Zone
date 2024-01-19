@@ -122,10 +122,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   SizedBox(height: 32.h),
-                  const PostersViewWidget(
-                    title: "suggestedForYou",
-                    movies: [],
-                  ),
+                  // const PostersViewWidget(
+                  //   title: "suggestedForYou",
+                  //   path: '',
+                  // ),
                 ],
               ),
             ),

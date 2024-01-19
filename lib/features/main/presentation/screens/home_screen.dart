@@ -1,15 +1,19 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movie_zone/core/api/api_constants.dart';
 import 'package:movie_zone/core/widgets/category_selector_widget.dart';
+import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/widget/brand_widget.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../core/widgets/posters_view_widget.dart';
 import '../../domain/entities/choice_entity.dart';
+import '../cubit/popular_movies/popular_movies_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,6 +41,18 @@ class _HomeScreenState extends State<HomeScreen> {
       categoryId: '',
     ),
   ];
+
+  @override
+  void initState() {
+    initialize();
+    super.initState();
+  }
+
+  initialize() {
+    BlocProvider.of<MoviesCubit>(context).load();
+    BlocProvider.of<PopularMoviesCubit>(context).load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,13 +122,37 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(height: 10.h),
-            const PostersViewWidget(title: "popularMovies", movies: []),
-            SizedBox(height: 32.h),
-            const PostersViewWidget(title: "tvSeries", movies: []),
+            BlocBuilder<MoviesCubit, MoviesState>(
+              builder: (context, state) {
+                if (state is MoviesLoaded) {
+                  return PostersViewWidget(
+                    title: "discover",
+                    movies: state.results.movies,
+                  );
+                }
+
+                return const SizedBox();
+              },
+            ),
+
             SizedBox(height: 32.h),
 
+            BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+              builder: (context, state) {
+                if (state is PopularMoviesLoaded) {
+                  return PostersViewWidget(
+                    title: "popularMovies",
+                    movies: state.results.movies,
+                  );
+                }
+
+                return const SizedBox();
+              },
+            ),
+
+            SizedBox(height: 32.h),
             Padding(
-              padding:   EdgeInsets.only(left: 20.w),
+              padding: EdgeInsets.only(left: 20.w),
               child: DelayedDisplay(
                 delay: const Duration(milliseconds: 40),
                 slidingBeginOffset: const Offset(-1, 0),
@@ -140,12 +180,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       "https://i.pinimg.com/564x/6e/44/d8/6e44d8091bbce3113a6b5ea1af6b7bff.jpg";
                   return Padding(
                     padding: EdgeInsets.only(
-                        right: 12.w, left: index == 0 ? 20.w : 0,),
+                      right: 12.w,
+                      left: index == 0 ? 20.w : 0,
+                    ),
                     child: Hero(
                       tag: logoUrl.hashCode,
                       child: BrandWidget(
                         imageForViewUrl:
-                        "https://i.pinimg.com/564x/55/3f/6b/553f6b41975bf39b3022f43c9abc1ef3.jpg",
+                            "https://i.pinimg.com/564x/55/3f/6b/553f6b41975bf39b3022f43c9abc1ef3.jpg",
                         fullLogoUrl: logoUrl,
                         onTap: (p0) {
                           Navigator.push(
@@ -161,11 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
               ),
             ),
-
             SizedBox(height: 32.h),
-            const PostersViewWidget(title: "sports", movies: []),
+            // const PostersViewWidget(title: "sports", path: '',),
             SizedBox(height: 120.h),
-
           ],
         ),
       ),

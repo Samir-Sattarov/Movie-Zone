@@ -5,4 +5,5 @@ import '../entities/movie_results_entity.dart';
 
 abstract class MainRepository {
   Future<Either<AppError, MovieResultsEntity>> getMovies();
+  Future<Either<AppError, MovieResultsEntity>> getPopularMovies();
 }

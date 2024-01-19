@@ -15,3 +15,21 @@ class GetMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
   Future<Either<AppError, MovieResultsEntity>> call(NoParams params) =>
       mainRepository.getMovies();
 }
+
+
+class GetPopularMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
+  final MainRepository mainRepository;
+
+  GetPopularMoviesUsecase(this.mainRepository);
+
+  @override
+  Future<Either<AppError, MovieResultsEntity>> call(NoParams params) =>
+      mainRepository.getPopularMovies();
+}
+
+
+class GetMoviesUsecaseParams {
+  final String path;
+
+  GetMoviesUsecaseParams({required this.path});
+}

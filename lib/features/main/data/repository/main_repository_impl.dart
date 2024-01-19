@@ -6,18 +6,15 @@ import 'package:movie_zone/features/main/domain/repository/main_repository.dart'
 
 import '../../domain/entities/movie_results_entity.dart';
 
-
 class MainRepositoryImpl extends MainRepository {
   final MainRemoteDataSource remoteDataSource;
 
   MainRepositoryImpl(this.remoteDataSource);
 
-
-
   @override
   Future<Either<AppError, MovieResultsEntity>> getMovies() async {
     try {
-      final response = await remoteDataSource.getMovies();
+      final response = await remoteDataSource.getMovies( );
       return Right(response);
     } catch (error) {
       return Left(
@@ -29,5 +26,18 @@ class MainRepositoryImpl extends MainRepository {
     }
   }
 
-
+  @override
+  Future<Either<AppError, MovieResultsEntity>> getPopularMovies() async {
+    try {
+      final response = await remoteDataSource.getPopularMovies();
+      return Right(response);
+    } catch (error) {
+      return Left(
+        AppError(
+          appErrorType: AppErrorType.api,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
 }

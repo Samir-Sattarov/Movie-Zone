@@ -23,6 +23,8 @@ class ApiClientImpl extends ApiClient {
   Future get(String path, Map<String, dynamic> params) async {
     String? token = await localDataSource.getSessionId();
 
+    print("Token $token");
+
     final Map<String, String> header = {
       "Authorization": "Bearer $token",
       "Content-Type": "application/json",
@@ -31,6 +33,8 @@ class ApiClientImpl extends ApiClient {
     final response =
         await client.get(getPath(path, params: params), headers: header);
 
+
+    print("responsasdfasdfasdfe ${response.statusCode}");
     return _errorHandler(response);
   }
 

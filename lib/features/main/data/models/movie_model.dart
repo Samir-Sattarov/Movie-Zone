@@ -5,7 +5,6 @@ import '../../domain/entities/movie_entity.dart';
 class MovieModel extends MovieEntity {
   const MovieModel({
     required super.title,
-    required super.description,
     required super.imageUrl,
     required super.releaseDate,
     required super.overall,
@@ -15,7 +14,6 @@ class MovieModel extends MovieEntity {
   factory MovieModel.fromEntity(MovieEntity entity) {
     return MovieModel(
       title: entity.title,
-      description: entity.description,
       id: entity.id,
       imageUrl: entity.imageUrl,
       releaseDate: entity.releaseDate,
@@ -26,7 +24,6 @@ class MovieModel extends MovieEntity {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       title: json['title'],
-      description: json['description'],
       id: json['id'],
       imageUrl: json['backdrop_path'],
       releaseDate: json['release_date'],
@@ -38,7 +35,6 @@ class MovieModel extends MovieEntity {
     final Map<String, dynamic> data = {};
 
     data["title"] = title;
-    data["description"] = description;
     data["id"] = id;
     data["backdrop_path"] = imageUrl;
     data["release_date"] = releaseDate;

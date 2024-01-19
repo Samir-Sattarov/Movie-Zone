@@ -48,7 +48,8 @@ class LibraryItemWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 12.w),
                   Text(
-                    "${entity.releaseDate.day}/${entity.releaseDate.month}/${entity.releaseDate.year}",
+                    "asdfadf",
+                    // "${entity.releaseDate.day}/${entity.releaseDate.month}/${entity.releaseDate.year}",
                     style: TextStyle(
                       color: const Color(0xFFB9BFC1),
                       fontSize: 14.sp,

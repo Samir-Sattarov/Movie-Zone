@@ -39,13 +39,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     final entity = MovieEntity(
-      description:
-          "Oppenheimer is a biographical film that chronicles the life of J. Robert Oppenheimer, a brilliant physicist who was instrumental in developing the atomic bomb during World War II. This film explores Oppenheim... ",
       title: 'Oppenheimer',
       imageUrl:
           'https://movies.universalpictures.com/media/opr-tsr1sheet3-look2-rgb-3-1-1-64545c0d15f1e-1.jpg',
       overall: 100,
-      releaseDate: DateTime.now(),
+      releaseDate: DateTime.now().toString(),
       id: 234234234,
     );
     SystemChrome.setSystemUIOverlayStyle(

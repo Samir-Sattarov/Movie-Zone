@@ -8,10 +8,16 @@ import 'package:movie_zone/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:movie_zone/features/auth/presentation/cubit/auth/auth_cubit.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:movie_zone/features/main/data/datasources/main_remote_data_source.dart';
+import 'package:movie_zone/features/main/data/repository/main_repository_impl.dart';
+import 'package:movie_zone/features/main/domain/repository/main_repository.dart';
+import 'package:movie_zone/features/main/domain/usecases/movie_usecases.dart';
 import '../core/api/firebase_api.dart';
 import '../core/utils/secure_storage.dart';
 import '../features/auth/domain/usecases/session_usecases.dart';
 import '../features/auth/presentation/cubit/session/session_cubit.dart';
+import '../features/main/presentation/cubit/movies/movies_cubit.dart';
+import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 
 final locator = GetIt.I;
 
@@ -28,8 +34,12 @@ void setup() {
   locator.registerLazySingleton(() => FirebaseApi(locator()));
 
   // ================ BLoC / Cubit ================ //
+
   locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
   locator.registerFactory(() => SessionCubit(locator()));
+
+  locator.registerFactory(() => MoviesCubit(locator()));
+  locator.registerFactory(() => PopularMoviesCubit(locator()));
 
   // ================ UseCases ================ //
 
@@ -40,8 +50,10 @@ void setup() {
   locator.registerLazySingleton(() => LogOutUsecase(locator()));
   locator.registerLazySingleton(() => CheckActiveSession(locator()));
 
+  // ================ Movie ================ //
 
-
+  locator.registerLazySingleton(() => GetMoviesUsecase(locator()));
+  locator.registerLazySingleton(() => GetPopularMoviesUsecase(locator()));
 
   // ================ Repository / Datasource ================ //
 
@@ -50,10 +62,18 @@ void setup() {
   locator.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(locator(), locator()));
 
+  // ================ REPOSITORY ================ //
+
+  locator.registerLazySingleton<MainRepository>(
+      () => MainRepositoryImpl(locator()));
+
   // ================ DATASOURCE ================ //
 
   locator.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(locator()));
   locator.registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(locator()));
+
+  locator.registerLazySingleton<MainRemoteDataSource>(
+      () => MainRemoteDataSourceImpl(locator()));
 }

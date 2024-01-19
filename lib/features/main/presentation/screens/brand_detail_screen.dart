@@ -98,11 +98,11 @@ class BrandDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 32.h),
-            PostersViewWidget(title:  "featured", movies: []),
+            // const PostersViewWidget(title:  "featured",  ,),
 
 
             SizedBox(height: 32.h),
-            PostersViewWidget(title:  "mostWatched", movies: []),
+            // const PostersViewWidget(title:  "mostWatched",  path: '',),
 
 
             SizedBox(height: 120.h),
