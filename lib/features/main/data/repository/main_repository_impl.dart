@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:movie_zone/core/api/api_exceptions.dart';
 
 import 'package:movie_zone/core/entities/app_error.dart';
-import 'package:movie_zone/core/usecases/actions.dart';
+import 'package:movie_zone/core/usecases/action.dart';
 import 'package:movie_zone/features/auth/domain/entities/user_entity.dart';
 import 'package:movie_zone/features/main/data/datasources/main_remote_data_source.dart';
 import 'package:movie_zone/features/main/domain/repository/main_repository.dart';
