@@ -13,8 +13,10 @@ import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
 
 import '../../../../core/widgets/error_flash_bar.dart';
 import '../../../../core/widgets/posters_view_widget.dart';
+import '../../../../core/widgets/tv_view_widget.dart';
 import '../cubit/genres/genres_cubit.dart';
 import '../cubit/movies/movies_cubit.dart';
+import '../cubit/tv/tv_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -139,23 +141,22 @@ class _SearchScreenState extends State<SearchScreen> {
                       },
                     ),
                     SizedBox(height: 32.h),
-                    BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+                    BlocBuilder<TvCubit, TvState>(
                       builder: (context, state) {
-                        if (state is PopularMoviesLoaded) {
-                          final movies = state.results.movies;
-
-                          return PostersViewWidget(
-                            title: "suggestedForYou",
-                            movies: movies,
+                        if (state is TvLoaded) {
+                          return TvsViewWidget(
+                            title: "tvSeries",
+                            tvs: state.results.tvs,
                           );
                         }
 
-                        return const PostersViewWidget(
-                          title: "suggestedForYou",
-                          movies: [],
+                        return const TvsViewWidget(
+                          title: "tvSeries",
+                          tvs: [],
                         );
                       },
                     ),
+
                   ],
                 ),
               ),

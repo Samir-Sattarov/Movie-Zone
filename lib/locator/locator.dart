@@ -17,11 +17,13 @@ import '../core/utils/secure_storage.dart';
 import '../features/auth/domain/usecases/session_usecases.dart';
 import '../features/auth/presentation/cubit/session/session_cubit.dart';
 import '../features/main/domain/usecases/genres_usecase.dart';
+import '../features/main/domain/usecases/tv_usecase.dart';
 import '../features/main/domain/usecases/user_usecase.dart';
 import '../features/main/presentation/cubit/current_user/current_user_cubit.dart';
 import '../features/main/presentation/cubit/genres/genres_cubit.dart';
 import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
+import '../features/main/presentation/cubit/tv/tv_cubit.dart';
 
 final locator = GetIt.I;
 
@@ -49,6 +51,8 @@ void setup() {
 
   locator.registerFactory(() => GenresCubit(locator()));
 
+  locator.registerFactory(() => TvCubit(locator()));
+
   // ================ UseCases ================ //
 
   // ================ AUTH ================ //
@@ -70,6 +74,10 @@ void setup() {
   // ================ Genre ================ //
 
   locator.registerLazySingleton(() => GetGenresUsecase(locator()));
+
+  // ================ Genre ================ //
+
+  locator.registerLazySingleton(() => GetTvUsecase(locator()));
 
   // ================ Repository / Datasource ================ //
 

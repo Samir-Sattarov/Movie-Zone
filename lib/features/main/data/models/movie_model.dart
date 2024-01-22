@@ -25,7 +25,7 @@ class MovieModel extends MovieEntity {
     return MovieModel(
       title: json['title'],
       id: json['id'],
-      imageUrl: json['backdrop_path'],
+      imageUrl: json['poster_path'],
       releaseDate: json['release_date'],
       overall: json['vote_count'],
     );
@@ -36,7 +36,7 @@ class MovieModel extends MovieEntity {
 
     data["title"] = title;
     data["id"] = id;
-    data["backdrop_path"] = imageUrl;
+    data["poster_path"] = imageUrl;
     data["release_date"] = releaseDate;
     data["overall"] = overall;
 

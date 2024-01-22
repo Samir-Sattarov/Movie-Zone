@@ -5,6 +5,7 @@ import 'package:movie_zone/core/usecases/action.dart';
 import 'package:movie_zone/features/auth/domain/entities/user_entity.dart';
 import 'package:movie_zone/features/main/data/datasources/main_remote_data_source.dart';
 import 'package:movie_zone/features/main/domain/entities/genre_results_entity.dart';
+import 'package:movie_zone/features/main/domain/entities/tv_results_entity.dart';
 import 'package:movie_zone/features/main/domain/repository/main_repository.dart';
 
 import '../../domain/entities/movie_results_entity.dart';
@@ -37,6 +38,13 @@ class MainRepositoryImpl extends MainRepository {
   Future<Either<AppError, GenreResultsEntity>> getGenres() async {
     return await action<GenreResultsEntity>(
       task: remoteDataSource.getGenres(),
+    );
+  }
+
+  @override
+  Future<Either<AppError, TvResultsEntity>> getTv() async {
+    return await action<TvResultsEntity>(
+      task: remoteDataSource.getTv(),
     );
   }
 }

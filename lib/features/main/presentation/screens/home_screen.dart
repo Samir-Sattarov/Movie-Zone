@@ -11,11 +11,13 @@ import 'package:movie_zone/core/api/api_constants.dart';
 import 'package:movie_zone/core/utils/extentions.dart';
 import 'package:movie_zone/core/widgets/category_selector_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
+import 'package:movie_zone/features/main/presentation/cubit/tv/tv_cubit.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/widget/brand_widget.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../core/widgets/posters_view_widget.dart';
+import '../../../../core/widgets/tv_view_widget.dart';
 import '../../domain/entities/choice_entity.dart';
 import '../cubit/popular_movies/popular_movies_cubit.dart';
 
@@ -55,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   initialize() {
     BlocProvider.of<MoviesCubit>(context).load();
     BlocProvider.of<PopularMoviesCubit>(context).load();
+    BlocProvider.of<TvCubit>(context).load();
   }
 
   @override
@@ -79,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         BlocBuilder<MoviesCubit, MoviesState>(
                           builder: (context, state) {
-
                             print("state $state");
                             if (state is MoviesLoaded) {
                               final movies = state.results.movies;
@@ -179,6 +181,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             SizedBox(height: 32.h),
+            BlocBuilder<TvCubit, TvState>(
+              builder: (context, state) {
+                if (state is TvLoaded) {
+                  return TvsViewWidget(
+                    title: "tvSeries",
+                    tvs: state.results.tvs,
+                  );
+                }
+
+                return const TvsViewWidget(
+                  title: "tvSeries",
+                  tvs: [],
+                );
+              },
+            ),
 
             //// Brands
             // Padding(
@@ -234,8 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //   ),
             // ),
             // SizedBox(height: 32.h),
-            const PostersViewWidget(title: "sports", movies: [],),
-            SizedBox(height: 120.h),
+            SizedBox(height: 200.h),
           ],
         ),
       ),
