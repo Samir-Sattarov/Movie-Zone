@@ -5,6 +5,7 @@ import 'package:movie_zone/core/usecases/action.dart';
 import 'package:movie_zone/features/auth/domain/entities/user_entity.dart';
 import 'package:movie_zone/features/main/data/datasources/main_remote_data_source.dart';
 import 'package:movie_zone/features/main/domain/entities/genre_results_entity.dart';
+import 'package:movie_zone/features/main/domain/entities/movie_detail_entity.dart';
 import 'package:movie_zone/features/main/domain/entities/tv_results_entity.dart';
 import 'package:movie_zone/features/main/domain/repository/main_repository.dart';
 
@@ -17,7 +18,9 @@ class MainRepositoryImpl extends MainRepository {
 
   @override
   Future<Either<AppError, MovieResultsEntity>> getMovies() async {
-    return await action<MovieResultsEntity>(task: remoteDataSource.getMovies());
+    return await action<MovieResultsEntity>(
+      task: remoteDataSource.getMovies(),
+    );
   }
 
   @override
@@ -45,6 +48,13 @@ class MainRepositoryImpl extends MainRepository {
   Future<Either<AppError, TvResultsEntity>> getTv() async {
     return await action<TvResultsEntity>(
       task: remoteDataSource.getTv(),
+    );
+  }
+
+  @override
+  Future<Either<AppError, MovieDetailEntity>> getMovieDetail(int id) async {
+    return await action<MovieDetailEntity>(
+      task: remoteDataSource.getMovieDetail(id),
     );
   }
 }

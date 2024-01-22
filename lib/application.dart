@@ -10,6 +10,7 @@ import 'features/auth/presentation/cubit/session/session_cubit.dart';
 import 'features/auth/presentation/screens/on_boarding_screen.dart';
 import 'features/main/presentation/cubit/current_user/current_user_cubit.dart';
 import 'features/main/presentation/cubit/genres/genres_cubit.dart';
+import 'features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import 'features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'features/main/presentation/cubit/tv/tv_cubit.dart';
@@ -32,6 +33,7 @@ class _ApplicationState extends State<Application> {
   late SecureStorage secureStorage;
   late CurrentUserCubit currentUserCubit;
   late TvCubit tvCubit;
+  late MovieDetailCubit movieDetailCubit;
 
   @override
   void initState() {
@@ -43,6 +45,7 @@ class _ApplicationState extends State<Application> {
     genresCubit = locator();
     currentUserCubit = locator();
     tvCubit = locator();
+    movieDetailCubit = locator();
 
     initalize();
     super.initState();
@@ -66,6 +69,7 @@ class _ApplicationState extends State<Application> {
         BlocProvider.value(value: genresCubit),
         BlocProvider.value(value: currentUserCubit),
         BlocProvider.value(value: tvCubit),
+        BlocProvider.value(value: movieDetailCubit),
         BlocProvider.value(value: sessionCubit..checkSession()),
       ],
       child: ScreenUtilInit(

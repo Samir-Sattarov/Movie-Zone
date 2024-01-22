@@ -69,8 +69,7 @@ class _TvsViewWidgetState extends State<TvsViewWidget> {
                 itemBuilder: (context, index) {
                   final movie = widget.tvs[index];
 
-
-                  if(movie.imageUrl.isEmpty) return const SizedBox();
+                  if (movie.imageUrl.isEmpty) return const SizedBox();
                   final imageUrl =
                       "${ApiConstants.imageApiUrl}${movie.imageUrl}";
                   return Padding(

@@ -7,7 +7,7 @@ import '../entities/app_error.dart';
 
 Future<Either<AppError, T>> action<T>({required Future<T> task}) async {
   try {
-    final response = await task;
+    final response =  await task;
 
     return Right(response);
   } on SocketException {

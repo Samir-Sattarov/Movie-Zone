@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
           child: BlurContainer(
             blur: 30,
             height: 70.h,
-             color: Colors.white.withOpacity(0.05),
+            color: Colors.white.withOpacity(0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -71,9 +71,10 @@ class _MainScreenState extends State<MainScreen> {
               ],
             ),
           ).animate().slide(
-              begin: const Offset(0, 2),
-              end: const Offset(0, 0),
-              duration: const Duration(milliseconds: 250),),
+                begin: const Offset(0, 2),
+                end: const Offset(0, 0),
+                duration: const Duration(milliseconds: 250),
+              ),
         ),
       ),
     );
@@ -84,7 +85,6 @@ class _MainScreenState extends State<MainScreen> {
     required String iconPath,
     required Function() onTap,
   }) {
-
     return InkWell(
       onTap: onTap,
       child: SvgPicture.asset(

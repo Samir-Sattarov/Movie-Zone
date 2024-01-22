@@ -130,13 +130,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
                           return PostersViewWidget(
                             title: "discover",
-                            movies: movies,
+                            movies: movies, onTap: (int id) {  },
                           );
                         }
 
-                        return const PostersViewWidget(
+                        return   PostersViewWidget(
                           title: "discover",
-                          movies: [],
+                          movies: [], onTap: (int id) {  },
                         );
                       },
                     ),

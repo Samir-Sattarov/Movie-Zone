@@ -13,6 +13,7 @@ import 'package:movie_zone/core/widgets/category_selector_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/cubit/tv/tv_cubit.dart';
 import 'package:movie_zone/features/main/presentation/screens/brand_detail_screen.dart';
+import 'package:movie_zone/features/main/presentation/screens/movie_detail_screen.dart';
 import 'package:movie_zone/features/main/presentation/widget/brand_widget.dart';
 
 import '../../../../core/utils/assets.dart';
@@ -151,13 +152,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   return PostersViewWidget(
                     title: "discover",
-                    movies: movies,
+                    movies: movies, onTap: (int id) {
+
+
+
+                      Navigator.push(context, MovieDetailScreen.route(id: id));
+
+                  },
                   );
                 }
 
-                return const PostersViewWidget(
+                return   PostersViewWidget(
                   title: "discover",
-                  movies: [],
+                  movies: [], onTap: (int id) {  },
                 );
               },
             ),
@@ -169,13 +176,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is PopularMoviesLoaded) {
                   return PostersViewWidget(
                     title: "popularMovies",
-                    movies: state.results.movies,
+                    movies: state.results.movies, onTap: (int id) {  },
                   );
                 }
 
-                return const PostersViewWidget(
+                return   PostersViewWidget(
                   title: "popularMovies",
-                  movies: [],
+                  movies: [], onTap: (int id) {  },
                 );
               },
             ),

@@ -4,6 +4,7 @@ import '../../../../core/api/api_client.dart';
 import '../../../../core/api/firebase_api.dart';
 import '../../../auth/data/models/user_model.dart';
 import '../models/genre_results_model.dart';
+import '../models/movie_detail_model.dart';
 import '../models/movie_results_model.dart';
 import '../models/tv_results_model.dart';
 
@@ -12,6 +13,7 @@ abstract class MainRemoteDataSource {
   Future<MovieResultsModel> getPopularMovies();
   Future<GenreResultsModel> getGenres();
   Future<TvResultsModel> getTv();
+  Future<MovieDetailModel> getMovieDetail(int id);
   Future<UserModel> getCurrentUser();
 }
 
@@ -59,6 +61,15 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
     final response = await client.get(ApiConstants.tv, {});
 
     final model = TvResultsModel.fromJson(response);
+
+    return model;
+  }
+
+  @override
+  Future<MovieDetailModel> getMovieDetail(int id) async {
+    final response = await client.get("${ApiConstants.movieDetail}$id", {});
+
+    final model = MovieDetailModel.fromJson(response);
 
     return model;
   }

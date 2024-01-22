@@ -14,8 +14,9 @@ import '../../features/main/domain/entities/movie_entity.dart';
 class PostersViewWidget extends StatefulWidget {
   final String title;
   final List<MovieEntity> movies;
+  final Function(int id )  onTap;
 
-  const PostersViewWidget({Key? key, required this.title, required this.movies})
+  const PostersViewWidget({Key? key, required this.title, required this.movies, required this.onTap})
       : super(key: key);
 
   @override
@@ -73,15 +74,18 @@ class _PostersViewWidgetState extends State<PostersViewWidget> {
                   return Padding(
                     padding: EdgeInsets.only(
                         right: 12.w, left: index == 0 ? 20.w : 0),
-                    child: PosterWidget(
-                      width: 158,
-                      hasNewEpisodes: false,
-                      url: imageUrl,
-                    )
-                        .animate()
-                        .fade(duration: 500.ms)
-                        .slideX(curve: Curves.easeInOutQuad)
-                        .slideY(),
+                    child: GestureDetector(
+                      onTap: () => widget.onTap.call(movie.id),
+                      child: PosterWidget(
+                        width: 158,
+                        hasNewEpisodes: false,
+                        url: imageUrl,
+                      )
+                          .animate()
+                          .fade(duration: 500.ms)
+                          .slideX(curve: Curves.easeInOutQuad)
+                          .slideY(),
+                    ),
                   );
                 },
               ),

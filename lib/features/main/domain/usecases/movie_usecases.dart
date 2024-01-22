@@ -3,6 +3,7 @@ import 'package:movie_zone/core/entities/no_params.dart';
 
 import '../../../../core/entities/app_error.dart';
 import '../../../../core/usecases/usecase.dart';
+import '../entities/movie_detail_entity.dart';
 import '../entities/movie_results_entity.dart';
 import '../repository/main_repository.dart';
 
@@ -27,6 +28,24 @@ class GetPopularMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
       mainRepository.getPopularMovies();
 }
 
+
+
+class GetMovieDetailUsecase extends UseCase<MovieDetailEntity, GetMovieDetailUsecaseParams> {
+  final MainRepository mainRepository;
+
+  GetMovieDetailUsecase(this.mainRepository);
+
+  @override
+  Future<Either<AppError, MovieDetailEntity>> call(GetMovieDetailUsecaseParams params) =>
+      mainRepository.getMovieDetail(params.id);
+}
+
+
+class GetMovieDetailUsecaseParams {
+  final int id;
+
+  GetMovieDetailUsecaseParams({required this.id});
+}
 
 class GetMoviesUsecaseParams {
   final String path;
