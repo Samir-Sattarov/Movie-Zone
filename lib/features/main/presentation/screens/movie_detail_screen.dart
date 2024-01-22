@@ -45,13 +45,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
     return Scaffold(
       backgroundColor: const Color(0xFF0F1111),
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
-          builder: (context, state) {
-            if (state is MovieDetailLoaded) {
-              final movieDetail = state.detail;
-              return Column(
+      body: BlocBuilder<MovieDetailCubit, MovieDetailState>(
+        builder: (context, state) {
+          if (state is MovieDetailLoaded) {
+            final movieDetail = state.detail;
+            return SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
                 children: [
                   SizedBox(
                     height: 370.h,
@@ -140,20 +140,20 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   SizedBox(height: 24.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child:   ReadMoreText(
+                    child: ReadMoreText(
                       movieDetail.description,
                       trimLines: 3,
                       colorClickableText: Colors.white,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: 'Show more',
                       trimExpandedText: 'Show less',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFB9BFC1),
                         fontSize: 16,
                         fontFamily: 'SF Pro Display',
                         fontWeight: FontWeight.w400,
                       ),
-                      moreStyle: TextStyle(
+                      moreStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -164,7 +164,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TrailerWidget(
-                      url:                                 "${ApiConstants.imageApiUrl}${movieDetail.imageUrl}",
+                      url: "${ApiConstants.imageApiUrl}${movieDetail.imageUrl}",
                       title: movieDetail.title,
                       time: "1m 54s",
                     ),
@@ -211,9 +211,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           10,
                           (index) => Padding(
                             padding: EdgeInsets.only(right: 12.w),
-                            child: PosterWidget(url:
-
-                            "${ApiConstants.imageApiUrl}${movieDetail.imageUrl}",
+                            child: PosterWidget(
+                              url:
+                                  "${ApiConstants.imageApiUrl}${movieDetail.imageUrl}",
                             ),
                           ),
                         ),
@@ -223,13 +223,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   SizedBox(height: 68.h),
                 ],
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
+              ),
             );
-          },
-        ),
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
