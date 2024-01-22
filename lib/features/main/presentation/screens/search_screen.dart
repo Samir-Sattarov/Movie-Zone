@@ -2,15 +2,19 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/utils/assets.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
+import 'package:movie_zone/features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
 
 import '../../../../core/widgets/error_flash_bar.dart';
+import '../../../../core/widgets/posters_view_widget.dart';
 import '../cubit/genres/genres_cubit.dart';
+import '../cubit/movies/movies_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -82,13 +86,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                     SizedBox(height: 20.h),
-
                     BlocBuilder<GenresCubit, GenresState>(
                       builder: (context, state) {
                         if (state is GenresLoaded) {
                           final results = state.results.genres;
                           return SizedBox(
-                            height: 40,
+                            height: 40.h,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -112,14 +115,47 @@ class _SearchScreenState extends State<SearchScreen> {
                           );
                         }
 
-                        return const SizedBox();
+                        return SizedBox(
+                          height: 40.h,
+                        );
+                      },
+                    ).animate().fadeIn(duration: const Duration(seconds: 1)),
+                    SizedBox(height: 32.h),
+                    BlocBuilder<MoviesCubit, MoviesState>(
+                      builder: (context, state) {
+                        if (state is MoviesLoaded) {
+                          final movies = state.results.movies;
+
+                          return PostersViewWidget(
+                            title: "discover",
+                            movies: movies,
+                          );
+                        }
+
+                        return const PostersViewWidget(
+                          title: "discover",
+                          movies: [],
+                        );
                       },
                     ),
                     SizedBox(height: 32.h),
-                    // const PostersViewWidget(
-                    //   title: "suggestedForYou",
-                    //   path: '',
-                    // ),
+                    BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+                      builder: (context, state) {
+                        if (state is PopularMoviesLoaded) {
+                          final movies = state.results.movies;
+
+                          return PostersViewWidget(
+                            title: "suggestedForYou",
+                            movies: movies,
+                          );
+                        }
+
+                        return const PostersViewWidget(
+                          title: "suggestedForYou",
+                          movies: [],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

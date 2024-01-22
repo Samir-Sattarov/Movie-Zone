@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/features/auth/domain/entities/user_entity.dart';
@@ -50,11 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () {},
                     );
                   }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return  SizedBox(
+                    height: 72.h,
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.red,
+                      ),
+                    ),
                   );
                 },
-              ),
+              ).animate().fade(duration: Duration(seconds: 1)),
             ),
             SizedBox(height: 52.h),
             _categoryWidget("settings"),

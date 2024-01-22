@@ -14,7 +14,7 @@ class GenreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 40.h,
       decoration: BoxDecoration(
         color: Colors.red.shade500.withOpacity(0.5),
         borderRadius: BorderRadius.circular(10)
