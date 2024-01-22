@@ -16,8 +16,10 @@ import '../core/api/firebase_api.dart';
 import '../core/utils/secure_storage.dart';
 import '../features/auth/domain/usecases/session_usecases.dart';
 import '../features/auth/presentation/cubit/session/session_cubit.dart';
+import '../features/main/domain/usecases/genres_usecase.dart';
 import '../features/main/domain/usecases/user_usecase.dart';
 import '../features/main/presentation/cubit/current_user/current_user_cubit.dart';
+import '../features/main/presentation/cubit/genres/genres_cubit.dart';
 import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 
@@ -45,6 +47,7 @@ void setup() {
 
   locator.registerFactory(() => CurrentUserCubit(locator()));
 
+  locator.registerFactory(() => GenresCubit(locator()));
 
   // ================ UseCases ================ //
 
@@ -63,6 +66,10 @@ void setup() {
   // ================ User ================ //
 
   locator.registerLazySingleton(() => GetCurrentUserUsecase(locator()));
+
+  // ================ Genre ================ //
+
+  locator.registerLazySingleton(() => GetGenresUsecase(locator()));
 
   // ================ Repository / Datasource ================ //
 

@@ -2,18 +2,15 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/utils/assets.dart';
-import 'package:movie_zone/core/widgets/category_selector_widget.dart';
-import 'package:movie_zone/core/widgets/posters_view_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
-import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
 import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
-import 'package:movie_zone/features/main/presentation/widget/library_item_widget.dart';
 
-import '../../../../core/widgets/poster_widget.dart';
-import '../../domain/entities/choice_entity.dart';
+import '../../../../core/widgets/error_flash_bar.dart';
+import '../cubit/genres/genres_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -34,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     controllerSearch = TextEditingController();
+    BlocProvider.of<GenresCubit>(context).load();
     super.initState();
   }
 
@@ -46,87 +44,84 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Padding(
-          padding:   EdgeInsets.symmetric(vertical: 16.h),
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 24.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: SizedBox(
-                      height: 41.h,
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormFieldWidget(
-                        controller: controllerSearch,
-                        hint: 'search',
-                        leadingIcon: SizedBox(
-                          height: 20.h,
-                          width: 20.w,
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.tSearchIcon,
-                              color: Colors.white,
+      body: BlocListener<GenresCubit, GenresState>(
+        listener: (context, state) {
+          if (state is GenresError) {
+            ErrorFlushBar(state.message).show(context);
+          }
+        },
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 24.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: SizedBox(
+                        height: 41.h,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormFieldWidget(
+                          controller: controllerSearch,
+                          hint: 'search',
+                          leadingIcon: SizedBox(
+                            height: 20.h,
+                            width: 20.w,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                Assets.tSearchIcon,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      children: [
-                        Text(
-                          "genres".tr(),
-                          style: const TextStyle(
-                            color: Color(0xFFF5F5F5),
-                            fontSize: 24,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        const Icon(
-                          Icons.chevron_right_rounded,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: GridView.builder(
-                      physics: const ClampingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12.w,
-                        mainAxisSpacing: 12.h,
-                        mainAxisExtent: 100.h,
-                      ),
-                      shrinkWrap: true,
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return const GenreWidget(
-                            url:
-                                "https://i.pinimg.com/564x/d6/34/66/d634660d4d1ea2b5ebd3e92282afa9fe.jpg",
-                            title: "Retro");
+                    SizedBox(height: 20.h),
+
+                    BlocBuilder<GenresCubit, GenresState>(
+                      builder: (context, state) {
+                        if (state is GenresLoaded) {
+                          final results = state.results.genres;
+                          return SizedBox(
+                            height: 40,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 20),
+                                  ...List.generate(
+                                    results.length,
+                                    (index) {
+                                      final item = results[index];
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: GenreWidget(data: item),
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(width: 20),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+
+                        return const SizedBox();
                       },
                     ),
-                  ),
-                  SizedBox(height: 32.h),
-                  // const PostersViewWidget(
-                  //   title: "suggestedForYou",
-                  //   path: '',
-                  // ),
-                ],
+                    SizedBox(height: 32.h),
+                    // const PostersViewWidget(
+                    //   title: "suggestedForYou",
+                    //   path: '',
+                    // ),
+                  ],
+                ),
               ),
             ),
           ),

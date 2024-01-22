@@ -84,6 +84,7 @@ class _MainScreenState extends State<MainScreen> {
     required String iconPath,
     required Function() onTap,
   }) {
+
     return InkWell(
       onTap: onTap,
       child: SvgPicture.asset(

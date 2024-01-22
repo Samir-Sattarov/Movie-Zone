@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/core/utils/storage_keys.dart';
 import 'package:movie_zone/core/widgets/loading_widget.dart';
-import 'package:movie_zone/features/auth/presentation/screens/on_boarding_screen.dart';
-import 'package:movie_zone/features/auth/presentation/screens/sign_up_part_one.dart';
-import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'core/utils/secure_storage.dart';
 import 'features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'features/auth/presentation/cubit/session/session_cubit.dart';
+import 'features/auth/presentation/screens/on_boarding_screen.dart';
 import 'features/main/presentation/cubit/current_user/current_user_cubit.dart';
+import 'features/main/presentation/cubit/genres/genres_cubit.dart';
+import 'features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'features/main/presentation/screens/main_screen.dart';
 import 'locator/locator.dart';
@@ -25,6 +25,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   late AuthCubit authCubit;
   late SessionCubit sessionCubit;
+  late GenresCubit genresCubit;
   late MoviesCubit moviesCubit;
   late PopularMoviesCubit popularMoviesCubit;
   late SecureStorage secureStorage;
@@ -37,6 +38,7 @@ class _ApplicationState extends State<Application> {
     popularMoviesCubit = locator();
     sessionCubit = locator();
     secureStorage = locator();
+    genresCubit = locator();
     currentUserCubit = locator();
 
     initalize();
@@ -58,6 +60,7 @@ class _ApplicationState extends State<Application> {
         BlocProvider.value(value: authCubit),
         BlocProvider.value(value: moviesCubit),
         BlocProvider.value(value: popularMoviesCubit),
+        BlocProvider.value(value: genresCubit),
         BlocProvider.value(value: currentUserCubit),
         BlocProvider.value(value: sessionCubit..checkSession()),
       ],
