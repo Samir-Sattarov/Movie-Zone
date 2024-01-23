@@ -47,5 +47,7 @@
   "manageDevices" : "manageDevices",
   "history" : "history",
   "ratings" : "ratings",
-  "logOut" : "logOut"
+  "logOut" : "logOut",
+  "fullName" : "Full name",
+  "emailAddress" : "Email address"
 }

@@ -7,6 +7,7 @@ import 'package:movie_zone/features/auth/domain/entities/user_entity.dart';
 import 'package:movie_zone/features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:movie_zone/features/auth/presentation/cubit/session/session_cubit.dart';
 import 'package:movie_zone/features/auth/presentation/screens/on_boarding_screen.dart';
+import 'package:movie_zone/features/main/presentation/screens/edit_profile_screen.dart';
 import 'package:movie_zone/features/main/presentation/widget/profile_user_widget.dart';
 
 import '../../../../core/widgets/error_flash_bar.dart';
@@ -48,7 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   if (state is CurrentUserLoaded) {
                     return ProfileUserWidget(
                       user: state.user,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, EditProfileSettings.route(userEntity: state.user),);
+                      },
                     );
                   }
                   return  SizedBox(
@@ -60,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   );
                 },
-              ).animate().fade(duration: Duration(seconds: 1)),
+              ),
             ),
             SizedBox(height: 52.h),
             _categoryWidget("settings"),
