@@ -15,6 +15,7 @@ abstract class MainRemoteDataSource {
   Future<TvResultsModel> getTv();
   Future<MovieDetailModel> getMovieDetail(int id);
   Future<UserModel> getCurrentUser();
+  Future<void> editUser(UserModel model);
 }
 
 class MainRemoteDataSourceImpl extends MainRemoteDataSource {
@@ -73,4 +74,7 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
 
     return model;
   }
+
+  @override
+  Future<void> editUser(UserModel model) async => await firebaseApi.editCurrentUser(model);
 }

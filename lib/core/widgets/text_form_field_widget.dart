@@ -8,6 +8,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final Widget? leadingIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool enabled;
   const TextFormFieldWidget({
     Key? key,
     required this.controller,
@@ -15,6 +16,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.onSubmit,
     this.onChanged,
     this.leadingIcon,
+    this.enabled = true,
     this.validator,
   }) : super(key: key);
 
@@ -23,6 +25,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      enabled: enabled,
       onChanged: (value) => onChanged?.call(value),
       onFieldSubmitted: (value) => onSubmit?.call(value),
       style: TextStyle(

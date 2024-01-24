@@ -49,7 +49,7 @@ void setup() {
   locator.registerFactory(() => PopularMoviesCubit(locator()));
   locator.registerFactory(() => MovieDetailCubit(locator()));
 
-  locator.registerFactory(() => CurrentUserCubit(locator()));
+  locator.registerFactory(() => CurrentUserCubit(locator(),locator()));
 
   locator.registerFactory(() => GenresCubit(locator()));
 
@@ -73,6 +73,7 @@ void setup() {
   // ================ User ================ //
 
   locator.registerLazySingleton(() => GetCurrentUserUsecase(locator()));
+  locator.registerLazySingleton(() => EditUserUsecase(locator()));
 
   // ================ Genre ================ //
 

@@ -10,6 +10,7 @@ class CurrentUserError extends CurrentUserState {
   CurrentUserError({required this.message});
 }
 class CurrentUserLoading extends CurrentUserState {}
+class CurrentUserSaved extends CurrentUserState {}
 class CurrentUserLoaded extends CurrentUserState {
   final UserEntity user;
 

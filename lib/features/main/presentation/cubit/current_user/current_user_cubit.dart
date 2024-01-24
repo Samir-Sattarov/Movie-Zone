@@ -9,7 +9,8 @@ part 'current_user_state.dart';
 
 class CurrentUserCubit extends Cubit<CurrentUserState> {
   final GetCurrentUserUsecase getCurrentUserUsecase;
-  CurrentUserCubit(this.getCurrentUserUsecase) : super(CurrentUserInitial());
+  final EditUserUsecase editUserUsecase;
+  CurrentUserCubit(this.getCurrentUserUsecase, this.editUserUsecase) : super(CurrentUserInitial());
 
   load() async {
     final response = await getCurrentUserUsecase.call(NoParams());
@@ -17,6 +18,16 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
     response.fold(
       (l) => emit(CurrentUserError(message: l.errorMessage)),
       (r) => emit(CurrentUserLoaded(r)),
+    );
+  }
+
+  edit(UserEntity entity) async {
+
+    final response = await editUserUsecase.call(entity);
+
+    response.fold(
+          (l) => emit(CurrentUserError(message: l.errorMessage)),
+          (r) => emit(CurrentUserSaved()),
     );
   }
 }

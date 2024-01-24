@@ -1,10 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
+import 'package:movie_zone/core/widgets/error_flash_bar.dart';
+import 'package:movie_zone/core/widgets/success_flash_bar.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
 
 import '../../../auth/domain/entities/user_entity.dart';
+import '../cubit/current_user/current_user_cubit.dart';
 
 class EditProfileSettings extends StatefulWidget {
   static route({required UserEntity userEntity}) => MaterialPageRoute(
@@ -12,6 +16,7 @@ class EditProfileSettings extends StatefulWidget {
       );
 
   final UserEntity userEntity;
+
   const EditProfileSettings({Key? key, required this.userEntity})
       : super(key: key);
 
@@ -45,82 +50,110 @@ class _EditProfileSettingsState extends State<EditProfileSettings> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20).r,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 39.h,
-            ),
-            Center(
-              child: Container(
-                height: 92.h,
-                width: 92.w,
-                decoration: BoxDecoration(
-                    border:
-                    Border.all(color: const Color(0xff656E72), width: 1.5),
-                    shape: BoxShape.circle,
-                    color: const Color(0xff191B1C)),
-                child: Center(
-                  child: Text(
-                    widget.userEntity.name[0].toUpperCase(),
-                    style: TextStyle(
-                      color: const Color(0xFFEEEFF0),
-                      fontSize: 24.sp,
-                      fontFamily: 'SF Pro Display',
-                      fontWeight: FontWeight.w700,
+      body: BlocListener<CurrentUserCubit, CurrentUserState>(
+        listener: (context, state) {
+          if (state is CurrentUserError) {
+            ErrorFlushBar(state.message).show(context);
+          }
+          if (state is CurrentUserSaved) {
+            Navigator.pop(context);
+            BlocProvider.of<CurrentUserCubit>(context).load();
+            SuccessFlushBar("dataSuccessChanged".tr()).show(context);
+
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20).r,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 39.h,
+              ),
+              Center(
+                child: Container(
+                  height: 92.h,
+                  width: 92.w,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xff656E72), width: 1.5),
+                      shape: BoxShape.circle,
+                      color: const Color(0xff191B1C)),
+                  child: Center(
+                    child: Text(
+                      widget.userEntity.name[0].toUpperCase(),
+                      style: TextStyle(
+                        color: const Color(0xFFEEEFF0),
+                        fontSize: 24.sp,
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 40.h,
-            ),
-            Text(
-              "fullName".tr(),
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "SF Pro Display",
-                fontWeight: FontWeight.w500,
-                fontSize: 14.sp,
+              SizedBox(
+                height: 40.h,
               ),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            TextFormFieldWidget(
-              controller: controllerFullName,
-              hint: 'fullName',
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Text(
-              "emailAddress".tr(),
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "SF Pro Display",
-                fontWeight: FontWeight.w500,
-                fontSize: 14.sp,
+              Text(
+                "fullName".tr(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "SF Pro Display",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            TextFormFieldWidget(
-              controller: controllerEmail,
-              hint: 'emailAddress',
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            ButtonWidget(
-              title: "save",
-              onTap: () {},
-            ),
-          ],
+              SizedBox(
+                height: 8.h,
+              ),
+              TextFormFieldWidget(
+                controller: controllerFullName,
+                hint: 'fullName',
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Text(
+                "emailAddress".tr(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "SF Pro Display",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              TextFormFieldWidget(
+                controller: controllerEmail,
+                hint: 'emailAddress',
+                enabled: false,
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              ButtonWidget(
+                title: "save",
+                onTap: () {
+                  // final entity = UserEntity(
+                  //   id: widget.userEntity.id,
+                  //   email: controllerEmail.text,
+                  //   name: controllerFullName.text,
+                  //   phone: widget.userEntity.phone,
+                  //   watchedMovies: widget.userEntity.watchedMovies,
+                  // );
+
+                  widget.userEntity.email = controllerEmail.text;
+                  widget.userEntity.name = controllerFullName.text;
+
+                  BlocProvider.of<CurrentUserCubit>(context)
+                      .edit(widget.userEntity);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

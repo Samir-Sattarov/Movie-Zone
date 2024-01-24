@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../main/data/models/movie_model.dart';
 import '../../domain/entities/user_entity.dart';
 
+@immutable
 class UserModel extends UserEntity {
-  const UserModel({
+    UserModel({
     required super.id,
     required super.email,
     required super.name,

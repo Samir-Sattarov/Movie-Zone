@@ -14,4 +14,5 @@ abstract class MainRepository {
   Future<Either<AppError, UserEntity>> getCurrentUser();
   Future<Either<AppError, GenreResultsEntity>> getGenres();
   Future<Either<AppError, TvResultsEntity>> getTv();
+  Future<Either<AppError, void>> editCurrentUser(UserEntity user);
 }

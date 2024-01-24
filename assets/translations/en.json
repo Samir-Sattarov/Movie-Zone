@@ -49,5 +49,6 @@
   "ratings" : "ratings",
   "logOut" : "logOut",
   "fullName" : "Full name",
-  "emailAddress" : "Email address"
+  "emailAddress" : "Email address",
+  "dataSuccessChanged" : "Data successful changed"
 }

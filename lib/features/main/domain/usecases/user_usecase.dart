@@ -17,3 +17,13 @@ class GetCurrentUserUsecase extends UseCase<UserEntity, NoParams> {
   Future<Either<AppError, UserEntity>> call(NoParams params) =>
       mainRepository.getCurrentUser();
 }
+
+class EditUserUsecase extends UseCase<void, UserEntity> {
+  final MainRepository mainRepository;
+
+  EditUserUsecase(this.mainRepository);
+
+  @override
+  Future<Either<AppError, void>> call(UserEntity params) =>
+      mainRepository.editCurrentUser(params);
+}

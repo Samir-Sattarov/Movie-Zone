@@ -55,6 +55,14 @@ class FirebaseApi {
     return model;
   }
 
+  Future<void> editCurrentUser(UserModel model) async {
+    final userId = await secureStorage.get(key: StorageKeys.kSession);
+
+    return await fireStore.collection(ApiConstants.cUsers).doc(userId).update(
+          model.toJson(),
+        );
+  }
+
   // final FirebaseAuth auth = FirebaseAuth.instance;
   // final FirebaseFirestore core = FirebaseFirestore.instance;
 

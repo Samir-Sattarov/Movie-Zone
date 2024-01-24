@@ -9,6 +9,7 @@ import 'package:movie_zone/features/main/domain/entities/movie_detail_entity.dar
 import 'package:movie_zone/features/main/domain/entities/tv_results_entity.dart';
 import 'package:movie_zone/features/main/domain/repository/main_repository.dart';
 
+import '../../../auth/data/models/user_model.dart';
 import '../../domain/entities/movie_results_entity.dart';
 
 class MainRepositoryImpl extends MainRepository {
@@ -55,6 +56,13 @@ class MainRepositoryImpl extends MainRepository {
   Future<Either<AppError, MovieDetailEntity>> getMovieDetail(int id) async {
     return await action<MovieDetailEntity>(
       task: remoteDataSource.getMovieDetail(id),
+    );
+  }
+
+  @override
+  Future<Either<AppError, void>> editCurrentUser(UserEntity user) async {
+    return await action<void>(
+      task: remoteDataSource.editUser(UserModel.fromEntity(user)),
     );
   }
 }
