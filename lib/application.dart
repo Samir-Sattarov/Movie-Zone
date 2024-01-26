@@ -13,6 +13,7 @@ import 'features/main/presentation/cubit/genres/genres_cubit.dart';
 import 'features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import 'features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
+import 'features/main/presentation/cubit/search/search_movies_cubit.dart';
 import 'features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
 import 'features/main/presentation/cubit/tv/tv_cubit.dart';
 import 'features/main/presentation/screens/main_screen.dart';
@@ -36,6 +37,7 @@ class _ApplicationState extends State<Application> {
   late TvCubit tvCubit;
   late MovieDetailCubit movieDetailCubit;
   late SuggestedMoviesCubit suggestedMoviesCubit;
+  late SearchMoviesCubit searchMoviesCubit;
 
   @override
   void initState() {
@@ -46,6 +48,8 @@ class _ApplicationState extends State<Application> {
     secureStorage = locator();
     genresCubit = locator();
     currentUserCubit = locator();
+    searchMoviesCubit = locator();
+
     tvCubit = locator();
     movieDetailCubit = locator();
     suggestedMoviesCubit = locator();
@@ -68,6 +72,7 @@ class _ApplicationState extends State<Application> {
       providers: [
         BlocProvider.value(value: authCubit),
         BlocProvider.value(value: suggestedMoviesCubit),
+        BlocProvider.value(value: searchMoviesCubit),
         BlocProvider.value(value: moviesCubit),
         BlocProvider.value(value: popularMoviesCubit),
         BlocProvider.value(value: genresCubit),

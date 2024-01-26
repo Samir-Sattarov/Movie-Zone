@@ -9,6 +9,7 @@ import '../models/movie_results_model.dart';
 import '../models/tv_results_model.dart';
 
 abstract class MainRemoteDataSource {
+  Future<MovieResultsModel> searchMovies(String query);
   Future<MovieResultsModel> getMovies();
   Future<MovieResultsModel> getPopularMovies();
   Future<MovieResultsModel> getSuggestedMovies(int id);
@@ -77,11 +78,23 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
   }
 
   @override
-  Future<void> editUser(UserModel model) async => await firebaseApi.editCurrentUser(model);
+  Future<void> editUser(UserModel model) async =>
+      await firebaseApi.editCurrentUser(model);
 
   @override
   Future<MovieResultsModel> getSuggestedMovies(int id) async {
-    final response = await client.get(ApiConstants.similarMovies.replaceAll("%", id.toString()), {});
+    final response = await client
+        .get(ApiConstants.similarMovies.replaceAll("%", id.toString()), {});
+
+    final model = MovieResultsModel.fromJson(response);
+
+    return model;
+  }
+
+  @override
+  Future<MovieResultsModel> searchMovies(String query) async {
+    final response =
+        await client.get(ApiConstants.movieSearch.replaceAll("%", query), {});
 
     final model = MovieResultsModel.fromJson(response);
 

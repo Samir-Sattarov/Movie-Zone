@@ -24,6 +24,7 @@ import '../features/main/presentation/cubit/genres/genres_cubit.dart';
 import '../features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
+import '../features/main/presentation/cubit/search/search_movies_cubit.dart';
 import '../features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
 import '../features/main/presentation/cubit/tv/tv_cubit.dart';
 
@@ -46,6 +47,7 @@ void setup() {
   locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
   locator.registerFactory(() => SessionCubit(locator()));
 
+  locator.registerFactory(() => SearchMoviesCubit(locator()));
   locator.registerFactory(() => MoviesCubit(locator()));
   locator.registerFactory(() => PopularMoviesCubit(locator()));
   locator.registerFactory(() => MovieDetailCubit(locator()));
@@ -68,6 +70,7 @@ void setup() {
 
   // ================ Movie ================ //
 
+  locator.registerLazySingleton(() => SearchMovies(locator()));
   locator.registerLazySingleton(() => GetMoviesUsecase(locator()));
   locator.registerLazySingleton(() => GetPopularMoviesUsecase(locator()));
   locator.registerLazySingleton(() => GetMovieDetailUsecase(locator()));

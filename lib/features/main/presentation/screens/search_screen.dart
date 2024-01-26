@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/utils/assets.dart';
+import 'package:movie_zone/core/utils/use_debounce.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
@@ -14,9 +15,12 @@ import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
 import '../../../../core/widgets/error_flash_bar.dart';
 import '../../../../core/widgets/posters_view_widget.dart';
 import '../../../../core/widgets/tv_view_widget.dart';
+import '../../../../locator/locator.dart';
 import '../cubit/genres/genres_cubit.dart';
 import '../cubit/movies/movies_cubit.dart';
+import '../cubit/search/search_movies_cubit.dart';
 import '../cubit/tv/tv_cubit.dart';
+import 'search_result_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -32,6 +36,21 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  @override
+  Widget build(BuildContext context) {
+    return const _ContentWidget();
+  }
+}
+
+class _ContentWidget extends StatefulWidget {
+  const _ContentWidget({Key? key}) : super(key: key);
+
+  @override
+  State<_ContentWidget> createState() => _ContentWidgetState();
+}
+
+class _ContentWidgetState extends State<_ContentWidget> {
   late TextEditingController controllerSearch;
 
   @override
@@ -74,6 +93,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: TextFormFieldWidget(
                           controller: controllerSearch,
                           hint: 'search',
+                          onSubmit: (query) {
+                            Navigator.of(context)
+                                .push(SearchResultsScreen.route(query: query));
+                          },
                           leadingIcon: SizedBox(
                             height: 20.h,
                             width: 20.w,
@@ -130,13 +153,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
                           return PostersViewWidget(
                             title: "discover",
-                            movies: movies, onTap: (int id) {  },
+                            movies: movies,
+                            onTap: (int id) {},
                           );
                         }
 
-                        return   PostersViewWidget(
+                        return PostersViewWidget(
                           title: "discover",
-                          movies: [], onTap: (int id) {  },
+                          movies: [],
+                          onTap: (int id) {},
                         );
                       },
                     ),
@@ -156,7 +181,6 @@ class _SearchScreenState extends State<SearchScreen> {
                         );
                       },
                     ),
-
                   ],
                 ),
               ),

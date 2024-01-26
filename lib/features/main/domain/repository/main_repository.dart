@@ -8,6 +8,7 @@ import '../entities/movie_results_entity.dart';
 import '../entities/tv_results_entity.dart';
 
 abstract class MainRepository {
+  Future<Either<AppError, MovieResultsEntity>> searchMovies(String query);
   Future<Either<AppError, MovieResultsEntity>> getMovies();
   Future<Either<AppError, MovieDetailEntity>> getMovieDetail(int id);
   Future<Either<AppError, MovieResultsEntity>> getSuggestedMovies(int id);

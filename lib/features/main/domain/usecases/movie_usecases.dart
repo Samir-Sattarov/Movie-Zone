@@ -7,6 +7,18 @@ import '../entities/movie_detail_entity.dart';
 import '../entities/movie_results_entity.dart';
 import '../repository/main_repository.dart';
 
+
+class SearchMovies extends UseCase<MovieResultsEntity, SearchMoviesParams> {
+  final MainRepository mainRepository;
+
+  SearchMovies(this.mainRepository);
+
+  @override
+  Future<Either<AppError, MovieResultsEntity>> call(SearchMoviesParams params) =>
+      mainRepository.searchMovies(params.query);
+}
+
+
 class GetMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
   final MainRepository mainRepository;
 
@@ -16,7 +28,6 @@ class GetMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
   Future<Either<AppError, MovieResultsEntity>> call(NoParams params) =>
       mainRepository.getMovies();
 }
-
 
 class GetPopularMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
   final MainRepository mainRepository;
@@ -28,31 +39,38 @@ class GetPopularMoviesUsecase extends UseCase<MovieResultsEntity, NoParams> {
       mainRepository.getPopularMovies();
 }
 
-
-
-class GetMovieDetailUsecase extends UseCase<MovieDetailEntity, GetMovieDetailUsecaseParams> {
+class GetMovieDetailUsecase
+    extends UseCase<MovieDetailEntity, GetMovieDetailUsecaseParams> {
   final MainRepository mainRepository;
 
   GetMovieDetailUsecase(this.mainRepository);
 
   @override
-  Future<Either<AppError, MovieDetailEntity>> call(GetMovieDetailUsecaseParams params) =>
+  Future<Either<AppError, MovieDetailEntity>> call(
+          GetMovieDetailUsecaseParams params) =>
       mainRepository.getMovieDetail(params.id);
 }
 
-
-
-
-class GetSuggestedMovies extends UseCase<MovieResultsEntity, GetMovieDetailUsecaseParams> {
+class GetSuggestedMovies
+    extends UseCase<MovieResultsEntity, GetMovieDetailUsecaseParams> {
   final MainRepository mainRepository;
 
   GetSuggestedMovies(this.mainRepository);
 
   @override
-  Future<Either<AppError, MovieResultsEntity>> call(GetMovieDetailUsecaseParams params) =>
+  Future<Either<AppError, MovieResultsEntity>> call(
+          GetMovieDetailUsecaseParams params) =>
       mainRepository.getSuggestedMovies(params.id);
 }
 
+
+
+
+class SearchMoviesParams {
+  final String query;
+
+  SearchMoviesParams({required this.query});
+}
 
 class GetSuggestedMoviesParams {
   final int id;

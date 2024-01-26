@@ -72,4 +72,11 @@ class MainRepositoryImpl extends MainRepository {
       task: remoteDataSource.getSuggestedMovies(id),
     );
   }
+
+  @override
+  Future<Either<AppError, MovieResultsEntity>> searchMovies(String query) async {
+    return await action<MovieResultsEntity>(
+      task: remoteDataSource.searchMovies(query),
+    );
+  }
 }
