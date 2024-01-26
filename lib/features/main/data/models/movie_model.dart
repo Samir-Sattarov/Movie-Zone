@@ -24,8 +24,8 @@ class MovieModel extends MovieEntity {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       title: json['title'],
-      id: json['id'],
-      imageUrl: json['poster_path'],
+      id: json['id'] ,
+      imageUrl: json['poster_path'] ?? "",
       releaseDate: json['release_date'],
       overall: json['vote_count'],
     );

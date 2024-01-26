@@ -69,8 +69,10 @@ class _PostersViewWidgetState extends State<PostersViewWidget> {
                 itemBuilder: (context, index) {
                   final movie = widget.movies[index];
 
+                  if(movie.imageUrl.isEmpty) return const SizedBox();
                   final imageUrl =
                       "${ApiConstants.imageApiUrl}${movie.imageUrl}";
+
                   return Padding(
                     padding: EdgeInsets.only(
                         right: 12.w, left: index == 0 ? 20.w : 0),

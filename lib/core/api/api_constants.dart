@@ -8,6 +8,7 @@ class ApiConstants {
   static const popularMovies = "movie/popular";
   static const topRatedMovies = "movie/top_rated";
   static const genres = "genre/movie/list";
+  static const similarMovies = "movie/%/similar";
 
   // Firebase
   static const cUsers = "users";

@@ -11,6 +11,7 @@ import '../models/tv_results_model.dart';
 abstract class MainRemoteDataSource {
   Future<MovieResultsModel> getMovies();
   Future<MovieResultsModel> getPopularMovies();
+  Future<MovieResultsModel> getSuggestedMovies(int id);
   Future<GenreResultsModel> getGenres();
   Future<TvResultsModel> getTv();
   Future<MovieDetailModel> getMovieDetail(int id);
@@ -77,4 +78,13 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
 
   @override
   Future<void> editUser(UserModel model) async => await firebaseApi.editCurrentUser(model);
+
+  @override
+  Future<MovieResultsModel> getSuggestedMovies(int id) async {
+    final response = await client.get(ApiConstants.similarMovies.replaceAll("%", id.toString()), {});
+
+    final model = MovieResultsModel.fromJson(response);
+
+    return model;
+  }
 }

@@ -24,6 +24,7 @@ import '../features/main/presentation/cubit/genres/genres_cubit.dart';
 import '../features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
+import '../features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
 import '../features/main/presentation/cubit/tv/tv_cubit.dart';
 
 final locator = GetIt.I;
@@ -48,6 +49,7 @@ void setup() {
   locator.registerFactory(() => MoviesCubit(locator()));
   locator.registerFactory(() => PopularMoviesCubit(locator()));
   locator.registerFactory(() => MovieDetailCubit(locator()));
+  locator.registerFactory(() => SuggestedMoviesCubit(locator()));
 
   locator.registerFactory(() => CurrentUserCubit(locator(),locator()));
 
@@ -69,6 +71,7 @@ void setup() {
   locator.registerLazySingleton(() => GetMoviesUsecase(locator()));
   locator.registerLazySingleton(() => GetPopularMoviesUsecase(locator()));
   locator.registerLazySingleton(() => GetMovieDetailUsecase(locator()));
+  locator.registerLazySingleton(() => GetSuggestedMovies(locator()));
 
   // ================ User ================ //
 

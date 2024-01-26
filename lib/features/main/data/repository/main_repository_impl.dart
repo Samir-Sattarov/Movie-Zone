@@ -65,4 +65,11 @@ class MainRepositoryImpl extends MainRepository {
       task: remoteDataSource.editUser(UserModel.fromEntity(user)),
     );
   }
+
+  @override
+  Future<Either<AppError, MovieResultsEntity>> getSuggestedMovies(int id)async  {
+    return await action<MovieResultsEntity>(
+      task: remoteDataSource.getSuggestedMovies(id),
+    );
+  }
 }

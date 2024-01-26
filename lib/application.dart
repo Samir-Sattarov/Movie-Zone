@@ -13,6 +13,7 @@ import 'features/main/presentation/cubit/genres/genres_cubit.dart';
 import 'features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
 import 'features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
+import 'features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
 import 'features/main/presentation/cubit/tv/tv_cubit.dart';
 import 'features/main/presentation/screens/main_screen.dart';
 import 'locator/locator.dart';
@@ -34,6 +35,7 @@ class _ApplicationState extends State<Application> {
   late CurrentUserCubit currentUserCubit;
   late TvCubit tvCubit;
   late MovieDetailCubit movieDetailCubit;
+  late SuggestedMoviesCubit suggestedMoviesCubit;
 
   @override
   void initState() {
@@ -46,6 +48,7 @@ class _ApplicationState extends State<Application> {
     currentUserCubit = locator();
     tvCubit = locator();
     movieDetailCubit = locator();
+    suggestedMoviesCubit = locator();
 
     initalize();
     super.initState();
@@ -64,6 +67,7 @@ class _ApplicationState extends State<Application> {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: authCubit),
+        BlocProvider.value(value: suggestedMoviesCubit),
         BlocProvider.value(value: moviesCubit),
         BlocProvider.value(value: popularMoviesCubit),
         BlocProvider.value(value: genresCubit),

@@ -41,6 +41,25 @@ class GetMovieDetailUsecase extends UseCase<MovieDetailEntity, GetMovieDetailUse
 }
 
 
+
+
+class GetSuggestedMovies extends UseCase<MovieResultsEntity, GetMovieDetailUsecaseParams> {
+  final MainRepository mainRepository;
+
+  GetSuggestedMovies(this.mainRepository);
+
+  @override
+  Future<Either<AppError, MovieResultsEntity>> call(GetMovieDetailUsecaseParams params) =>
+      mainRepository.getSuggestedMovies(params.id);
+}
+
+
+class GetSuggestedMoviesParams {
+  final int id;
+
+  GetSuggestedMoviesParams({required this.id});
+}
+
 class GetMovieDetailUsecaseParams {
   final int id;
 
