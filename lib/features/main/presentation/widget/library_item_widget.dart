@@ -35,7 +35,6 @@ class LibraryItemWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 12.h),
-
               Row(
                 children: [
                   Text(

@@ -12,6 +12,7 @@ import 'package:movie_zone/core/widgets/loading_widget.dart';
 import 'package:movie_zone/core/widgets/text_form_field_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:movie_zone/features/main/presentation/widget/genre_widget.dart';
+import 'package:movie_zone/features/main/presentation/widget/search_result_card_widget.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/widgets/error_flash_bar.dart';
@@ -25,12 +26,10 @@ import '../cubit/search/search_movies_cubit.dart';
 import '../cubit/tv/tv_cubit.dart';
 
 class SearchResultsScreen extends StatefulWidget {
-  static route({required String query}) =>
-      MaterialPageRoute(
-        builder: (context) =>
-            SearchResultsScreen(
-              query: query,
-            ),
+  static route({required String query}) => MaterialPageRoute(
+        builder: (context) => SearchResultsScreen(
+          query: query,
+        ),
       );
 
   final String query;
@@ -120,42 +119,27 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                 Expanded(
                   child: BlocBuilder<SearchMoviesCubit, SearchMoviesState>(
                     builder: (context, state) {
-                  
-                      if(state is SearchLoaded) {
-                        final movies= state.results.movies;
-                        return  DelayedDisplay(
-                          delay: const Duration(milliseconds: 40),
-                          slidingBeginOffset: const Offset(-1, 0),
-                          fadeIn: true,
-                          slidingCurve: Curves.easeInCubic,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const ClampingScrollPhysics(),
-                            itemCount: movies.length,
-                            itemBuilder: (context, index) {
-                              final movie = movies[index];
-                  
-                              if(movie.imageUrl.isEmpty) return const SizedBox();
-                              final imageUrl =
-                                  "${ApiConstants.imageApiUrl}${movie.imageUrl}";
-                  
-                              return Padding(
-                                padding:   EdgeInsets.only(bottom: 20.h),
-                                child: PosterWidget(
-                                  height: 300.h,
-                                  hasNewEpisodes: false,
-                                  url: imageUrl,
-                                )
-                                    .animate()
-                                    .fade(duration: 500.ms)
-                                    .slideX(curve: Curves.easeInOutQuad)
-                                    .slideY(),
-                              );
-                            },
-                          ),
+                      if (state is SearchLoaded) {
+                        final movies = state.results.movies;
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: movies.length,
+                          itemBuilder: (context, index) {
+                            final movie = movies[index];
+
+                            if (movie.imageUrl.isEmpty) {
+                              return const SizedBox();
+                            }
+
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 20.h),
+                              child: SearchResultCardWidget(movie: movie),
+                            );
+                          },
                         );
                       }
-                  
+
                       return const Center(child: LoadingWidget());
                     },
                   ),
