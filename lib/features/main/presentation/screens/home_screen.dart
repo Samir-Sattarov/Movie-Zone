@@ -155,10 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   return PostersViewWidget(
                     title: "discover",
                     movies: discoverMovies,
-                    onTap: (int id) {
-                      Navigator.push(context, MovieDetailScreen.route(id: id));
-
-                    },
                   );
                 },
               ),
@@ -166,10 +162,6 @@ class _HomeScreenState extends State<HomeScreen> {
               PostersViewWidget(
                 title: "popularMovies",
                 movies: popularMovies,
-                onTap: (int id) {
-                  Navigator.push(context, MovieDetailScreen.route(id: id));
-
-                },
               ),
               SizedBox(height: 32.h),
               TvsViewWidget(

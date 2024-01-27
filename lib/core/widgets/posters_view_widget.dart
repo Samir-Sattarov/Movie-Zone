@@ -10,13 +10,13 @@ import 'package:movie_zone/core/widgets/poster_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movies/movies_cubit.dart';
 
 import '../../features/main/domain/entities/movie_entity.dart';
+import '../../features/main/presentation/screens/movie_detail_screen.dart';
 
 class PostersViewWidget extends StatefulWidget {
   final String title;
   final List<MovieEntity> movies;
-  final Function(int id )  onTap;
 
-  const PostersViewWidget({Key? key, required this.title, required this.movies, required this.onTap})
+  const PostersViewWidget({Key? key, required this.title, required this.movies})
       : super(key: key);
 
   @override
@@ -77,7 +77,8 @@ class _PostersViewWidgetState extends State<PostersViewWidget> {
                     padding: EdgeInsets.only(
                         right: 12.w, left: index == 0 ? 20.w : 0),
                     child: GestureDetector(
-                      onTap: () => widget.onTap.call(movie.id),
+                      onTap: () =>
+                          Navigator.of(context).push(MovieDetailScreen.route(id: movie.id)),
                       child: PosterWidget(
                         width: 158,
                         hasNewEpisodes: false,

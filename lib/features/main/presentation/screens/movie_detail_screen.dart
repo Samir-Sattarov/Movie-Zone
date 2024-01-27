@@ -195,7 +195,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     PostersViewWidget(
                       title: "basedOnOpenedFilm".tr(args: [movieDetail.title]),
                       movies: suggestedMovies,
-                      onTap: (id) {},
                     ),
                     SizedBox(height: 68.h),
                   ],

@@ -154,14 +154,12 @@ class _ContentWidgetState extends State<_ContentWidget> {
                           return PostersViewWidget(
                             title: "discover",
                             movies: movies,
-                            onTap: (int id) {},
                           );
                         }
 
                         return PostersViewWidget(
                           title: "discover",
                           movies: [],
-                          onTap: (int id) {},
                         );
                       },
                     ),
