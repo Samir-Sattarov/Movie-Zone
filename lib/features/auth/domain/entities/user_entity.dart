@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../main/domain/entities/movie_entity.dart';
+import '../../../main/domain/entities/watched_movie_entity.dart';
 
 
 @immutable
@@ -10,7 +10,7 @@ class UserEntity extends Equatable {
   late String email;
   late String name;
   final String phone;
-  final List<MovieEntity> watchedMovies;
+  final List<WatchedMovieEntity> watchedMovies;
 
     UserEntity({
     required this.id,

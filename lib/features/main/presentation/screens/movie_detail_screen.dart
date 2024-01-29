@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_zone/core/widgets/button_widget.dart';
 import 'package:movie_zone/core/widgets/posters_view_widget.dart';
+import 'package:movie_zone/core/widgets/success_flash_bar.dart';
 import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
 import 'package:movie_zone/core/widgets/poster_widget.dart';
 import 'package:movie_zone/features/main/presentation/cubit/movie_detail/movie_detail_cubit.dart';
@@ -15,6 +16,10 @@ import 'package:readmore/readmore.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/utils/assets.dart';
+import '../../../auth/domain/entities/user_entity.dart';
+import '../../data/models/watched_movie_model.dart';
+import '../../domain/entities/watched_movie_entity.dart';
+import '../cubit/current_user/current_user_cubit.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   static route({required int id}) => MaterialPageRoute(
@@ -37,10 +42,13 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   List<MovieEntity> suggestedMovies = [];
 
+  late UserEntity currentUser;
+
   @override
   void initState() {
     BlocProvider.of<MovieDetailCubit>(context).load(id: widget.id);
     BlocProvider.of<SuggestedMoviesCubit>(context).load(widget.id);
+    BlocProvider.of<CurrentUserCubit>(context).load();
     super.initState();
   }
 
@@ -50,12 +58,27 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
     return Scaffold(
       backgroundColor: const Color(0xFF0F1111),
-      body: BlocListener<SuggestedMoviesCubit, SuggestedMoviesState>(
-        listener: (context, state) {
-          if (state is SuggestedMoviesLoaded) {
-            suggestedMovies = state.results.movies;
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<SuggestedMoviesCubit, SuggestedMoviesState>(
+            listener: (context, state) {
+              if (state is SuggestedMoviesLoaded) {
+                suggestedMovies = state.results.movies;
+              }
+            },
+          ),
+          BlocListener<CurrentUserCubit, CurrentUserState>(
+            listener: (context, state) {
+              if (state is CurrentUserLoaded) {
+                currentUser = state.user;
+              }
+              
+              if(state is CurrentUserSaved) {
+                SuccessFlushBar("dataSuccessChanged".tr()).show(context);
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
           builder: (context, state) {
             if (state is MovieDetailLoaded) {
@@ -161,9 +184,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         children: [
                           ButtonWidget(
                             iconData: const Icon(Icons.play_arrow_rounded),
-                            title: "startWatching".tr(),
+                            title: "addToWatched".tr(),
                             height: 48.h,
-                            onTap: () {},
+                            onTap: () {
+                              currentUser.watchedMovies.add(
+                                WatchedMovieModel.fromMovieDetail(movieDetail),
+                              );
+
+                              BlocProvider.of<CurrentUserCubit>(context)
+                                  .edit(currentUser);
+                            },
                           ),
                         ],
                       ),

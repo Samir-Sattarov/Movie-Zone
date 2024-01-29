@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_zone/features/main/domain/entities/movie_entity.dart';
+import 'package:movie_zone/core/api/api_client.dart';
+import 'package:movie_zone/core/api/api_constants.dart';
+
+import '../../domain/entities/watched_movie_entity.dart';
 
 class LibraryItemWidget extends StatelessWidget {
-  final MovieEntity entity;
+  final WatchedMovieEntity entity;
   const LibraryItemWidget({Key? key, required this.entity}) : super(key: key);
 
   @override
@@ -16,42 +19,46 @@ class LibraryItemWidget extends StatelessWidget {
           SizedBox(
             width: 140.w,
             child: Image.network(
-              entity.imageUrl,
+              "${ApiConstants.imageApiUrl}${entity.imageUrl}",
               fit: BoxFit.cover,
             ),
           ),
           SizedBox(width: 8.w),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                entity.title,
-                style: TextStyle(
-                  color: const Color(0xFFEEEFF0),
-                  fontSize: 18.sp,
-                  fontFamily: 'SF Pro Display',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              SizedBox(height: 12.h),
-              Row(
-                children: [
-                  Text(
-                    "${dt.day}/${dt.month}/${dt.year}",
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: Text(
+                    entity.title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: const Color(0xFFB9BFC1),
-                      fontSize: 14.sp,
+                      color: const Color(0xFFEEEFF0),
+                      fontSize: 16.sp,
                       fontFamily: 'SF Pro Display',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-
-                ],
-              ),
-            ],
+                ),
+                SizedBox(height: 12.h),
+                Row(
+                  children: [
+                    Text(
+                      "${dt.day}/${dt.month}/${dt.year}",
+                      style: TextStyle(
+                        color: const Color(0xFFB9BFC1),
+                        fontSize: 14.sp,
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
           const Icon(
             Icons.file_download,
             size: 30,

@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 
 import '../../../main/data/models/movie_model.dart';
+import '../../../main/data/models/watched_movie_model.dart';
 import '../../domain/entities/user_entity.dart';
 
 @immutable
 class UserModel extends UserEntity {
-    UserModel({
+  UserModel({
     required super.id,
     required super.email,
     required super.name,
@@ -23,13 +24,15 @@ class UserModel extends UserEntity {
     );
   }
 
-  factory UserModel.fromJson(Map<String,dynamic> json) {
+  factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
       email: json['email'],
       name: json['name'],
       phone: json['phone'],
-      watchedMovies: List.from(json['watchedMovies']).map((e) => MovieModel.fromJson(e)).toList(),
+      watchedMovies: List.from(json['watchedMovies'])
+          .map((e) => WatchedMovieModel.fromJson(e))
+          .toList(),
     );
   }
 
@@ -41,7 +44,7 @@ class UserModel extends UserEntity {
     data["name"] = name;
     data["phone"] = phone;
     data["watchedMovies"] = List.from(watchedMovies)
-        .map((e) => MovieModel.fromEntity(e).toJson())
+        .map((e) => WatchedMovieModel.fromEntity(e).toJson())
         .toList();
 
     return data;
