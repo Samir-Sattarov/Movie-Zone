@@ -15,6 +15,7 @@ import 'features/main/presentation/cubit/movies/movies_cubit.dart';
 import 'features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'features/main/presentation/cubit/search/search_movies_cubit.dart';
 import 'features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
+import 'features/main/presentation/cubit/theme/theme_cubit.dart';
 import 'features/main/presentation/cubit/tv/tv_cubit.dart';
 import 'features/main/presentation/screens/main_screen.dart';
 import 'locator/locator.dart';
@@ -38,6 +39,7 @@ class _ApplicationState extends State<Application> {
   late MovieDetailCubit movieDetailCubit;
   late SuggestedMoviesCubit suggestedMoviesCubit;
   late SearchMoviesCubit searchMoviesCubit;
+  late ThemeCubit themeCubit;
 
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _ApplicationState extends State<Application> {
     tvCubit = locator();
     movieDetailCubit = locator();
     suggestedMoviesCubit = locator();
+    themeCubit = locator();
 
     initalize();
     super.initState();
@@ -62,7 +65,7 @@ class _ApplicationState extends State<Application> {
     await SecureStorage().save(
       key: StorageKeys.kToken,
       value:
-          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
+      "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
     );
   }
 
@@ -79,6 +82,7 @@ class _ApplicationState extends State<Application> {
         BlocProvider.value(value: currentUserCubit),
         BlocProvider.value(value: tvCubit),
         BlocProvider.value(value: movieDetailCubit),
+        BlocProvider.value(value: themeCubit),
         BlocProvider.value(value: sessionCubit..checkSession()),
       ],
       child: ScreenUtilInit(
@@ -97,18 +101,31 @@ class _ApplicationState extends State<Application> {
           },
         ),
         builder: (context, child) {
-          return MaterialApp(
-            title: 'Movie Zone',
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            theme: ThemeData(
-              scaffoldBackgroundColor: const Color(0xff0F1111),
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-            home: child,
+          return BlocBuilder<ThemeCubit, bool>(
+            builder: (context, state) {
+               Brightness bright = Brightness.light ;
+              if(state) {
+                bright = Brightness.dark;
+
+
+              }else {
+                bright = Brightness.light;
+
+              }
+              return MaterialApp(
+                title: 'Movie Zone',
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                theme: ThemeData(
+                  brightness:bright,
+                  scaffoldBackgroundColor: const Color(0xff0F1111),
+                  useMaterial3: false,
+                ),
+                home: child,
+              );
+            },
           );
         },
       ),

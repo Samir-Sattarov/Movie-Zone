@@ -30,6 +30,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
@@ -44,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
           child: BlurContainer(
             blur: 30,
             height: 70.h,
-            color: Colors.white.withOpacity(0.05),
+            color: isDark ? Colors.black : Colors.white.withOpacity(0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

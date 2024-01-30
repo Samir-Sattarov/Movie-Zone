@@ -6,8 +6,6 @@ import 'package:movie_zone/locator/locator.dart';
 import 'package:uuid/uuid.dart';
 
 import 'application.dart';
-import 'core/utils/secure_storage.dart';
-import 'core/utils/storage_keys.dart';
 import 'firebase_options.dart';
 
 const uuid = Uuid();

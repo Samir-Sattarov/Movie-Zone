@@ -12,6 +12,7 @@ import 'package:movie_zone/features/main/presentation/widget/profile_user_widget
 
 import '../../../../core/widgets/error_flash_bar.dart';
 import '../cubit/current_user/current_user_cubit.dart';
+import '../cubit/theme/theme_cubit.dart';
 import '../widget/profile_item_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -22,14 +23,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   @override
   void initState() {
     BlocProvider.of<CurrentUserCubit>(context).load();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: BlocListener<CurrentUserCubit, CurrentUserState>(
         listener: (context, state) {
@@ -50,11 +53,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ProfileUserWidget(
                       user: state.user,
                       onTap: () {
-                        Navigator.push(context, EditProfileSettings.route(userEntity: state.user),);
+                        Navigator.push(
+                          context,
+                          EditProfileSettings.route(userEntity: state.user),
+                        );
                       },
                     );
                   }
-                  return  SizedBox(
+                  return SizedBox(
                     height: 72.h,
                     child: const Center(
                       child: CircularProgressIndicator(
@@ -91,11 +97,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ProfileItemWidget(
               title: 'privacyPolicy',
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<ThemeCubit>(context).isDark(false);
+
+              },
             ),
             ProfileItemWidget(
               title: 'helpCenter',
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<ThemeCubit>(context).isDark(true);
+              },
             ),
             ProfileItemWidget(
               title: 'ratings',
@@ -107,9 +118,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               prefix: const Icon(Icons.exit_to_app, color: Colors.white),
               title: 'logOut',
               onTap: () {
-
                 BlocProvider.of<AuthCubit>(context).logOut();
-                Navigator.of(context).pushAndRemoveUntil(OnBoardingScreen.route(), (route) => false);
+                Navigator.of(context).pushAndRemoveUntil(
+                    OnBoardingScreen.route(), (route) => false);
               },
             ),
             SizedBox(height: 16.h),

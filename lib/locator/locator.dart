@@ -26,6 +26,7 @@ import '../features/main/presentation/cubit/movies/movies_cubit.dart';
 import '../features/main/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import '../features/main/presentation/cubit/search/search_movies_cubit.dart';
 import '../features/main/presentation/cubit/suggested_movie/suggested_movies_cubit.dart';
+import '../features/main/presentation/cubit/theme/theme_cubit.dart';
 import '../features/main/presentation/cubit/tv/tv_cubit.dart';
 
 final locator = GetIt.I;
@@ -45,6 +46,7 @@ void setup() {
   // ================ BLoC / Cubit ================ //
 
   locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
+  locator.registerFactory(() => ThemeCubit(locator()));
   locator.registerFactory(() => SessionCubit(locator()));
 
   locator.registerFactory(() => SearchMoviesCubit(locator()));

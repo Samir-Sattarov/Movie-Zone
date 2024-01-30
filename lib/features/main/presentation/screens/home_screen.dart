@@ -24,6 +24,7 @@ import '../../domain/entities/movie_entity.dart';
 import '../../domain/entities/tv_entity.dart';
 import '../cubit/popular_movies/popular_movies_cubit.dart';
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
