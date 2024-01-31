@@ -75,7 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _categoryWidget("settings"),
             ProfileItemWidget(
               title: 'language',
-              onTap: () {},
+              onTap: () {
+                // context.setLocale(const Locale("en"));
+              },
             ),
             ProfileItemWidget(
               title: 'notification',

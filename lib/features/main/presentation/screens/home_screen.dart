@@ -151,13 +151,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(height: 10.h),
-              BlocBuilder<MoviesCubit, MoviesState>(
-                builder: (context, state) {
-                  return PostersViewWidget(
-                    title: "discover",
-                    movies: discoverMovies,
-                  );
-                },
+              PostersViewWidget(
+                title: "discover",
+                movies: discoverMovies,
               ),
               SizedBox(height: 32.h),
               PostersViewWidget(
