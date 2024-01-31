@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: BlocListener<CurrentUserCubit, CurrentUserState>(
@@ -101,7 +101,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: 'privacyPolicy',
               onTap: () {
                 BlocProvider.of<ThemeCubit>(context).isDark(false);
-
               },
             ),
             ProfileItemWidget(

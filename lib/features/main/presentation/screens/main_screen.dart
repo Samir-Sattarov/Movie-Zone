@@ -46,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
           child: BlurContainer(
             blur: 30,
             height: 70.h,
-            color: isDark ? Colors.black : Colors.white.withOpacity(0.05),
+            color: isDark ? Colors.green : Colors.red,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

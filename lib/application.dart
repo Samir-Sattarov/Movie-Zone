@@ -65,7 +65,7 @@ class _ApplicationState extends State<Application> {
     await SecureStorage().save(
       key: StorageKeys.kToken,
       value:
-      "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
+          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjhiYjdlNjcxZGI5MDk4YzkyODIwNzI2YzFlMzNmMyIsInN1YiI6IjY1OTI5OTU5NjUxZmNmNWYxMzhlYjg3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pdqI_L93K4mexvxfX3KxhY43wEH6bCybCYHhuR1PaOw",
     );
   }
 
@@ -103,14 +103,11 @@ class _ApplicationState extends State<Application> {
         builder: (context, child) {
           return BlocBuilder<ThemeCubit, bool>(
             builder: (context, state) {
-               Brightness bright = Brightness.light ;
-              if(state) {
+              Brightness bright = Brightness.light;
+              if (state) {
                 bright = Brightness.dark;
-
-
-              }else {
+              } else {
                 bright = Brightness.light;
-
               }
               return MaterialApp(
                 title: 'Movie Zone',
@@ -119,8 +116,10 @@ class _ApplicationState extends State<Application> {
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
                 theme: ThemeData(
-                  brightness:bright,
-                  scaffoldBackgroundColor: const Color(0xff0F1111),
+                  brightness: bright,
+                  scaffoldBackgroundColor: bright == Brightness.dark
+                      ? const Color(0xff0F1111)
+                      : Colors.white,
                   useMaterial3: false,
                 ),
                 home: child,

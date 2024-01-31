@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/secure_storage.dart';
@@ -11,12 +10,8 @@ class ThemeCubit extends Cubit<bool> {
     load();
   }
 
-
-
   load() async {
-    final  response = await secureStorage.get(key: "isDark");
-
-
+    final response = await secureStorage.get(key: "isDark");
 
     print("response $response");
     if (response == null) {
