@@ -3,23 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:dartz/dartz.dart' as _i2;
+import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movie_zone/core/entities/app_error.dart' as _i5;
-import 'package:movie_zone/features/auth/domain/entities/user_entity.dart'
-    as _i8;
-import 'package:movie_zone/features/main/domain/entities/genre_results_entity.dart'
-    as _i9;
-import 'package:movie_zone/features/main/domain/entities/movie_detail_entity.dart'
-    as _i7;
+import 'package:movie_zone/core/entities/app_error.dart' as _i6;
+import 'package:movie_zone/core/entities/no_params.dart' as _i8;
 import 'package:movie_zone/features/main/domain/entities/movie_results_entity.dart'
-    as _i6;
-import 'package:movie_zone/features/main/domain/entities/tv_results_entity.dart'
-    as _i10;
+    as _i7;
 import 'package:movie_zone/features/main/domain/repository/main_repository.dart'
-    as _i3;
+    as _i2;
+import 'package:movie_zone/features/main/domain/usecases/movie_usecases.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -34,8 +29,9 @@ import 'package:movie_zone/features/main/domain/repository/main_repository.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
+class _FakeMainRepository_0 extends _i1.SmartFake
+    implements _i2.MainRepository {
+  _FakeMainRepository_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -44,174 +40,49 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-/// A class which mocks [MainRepository].
+class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
+  _FakeEither_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [GetMoviesUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMainRepository extends _i1.Mock implements _i3.MainRepository {
-  MockMainRepository() {
+class MockGetMoviesUsecase extends _i1.Mock implements _i4.GetMoviesUsecase {
+  MockGetMoviesUsecase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>> searchMovies(
-          String? query) =>
+  _i2.MainRepository get mainRepository => (super.noSuchMethod(
+        Invocation.getter(#mainRepository),
+        returnValue: _FakeMainRepository_0(
+          this,
+          Invocation.getter(#mainRepository),
+        ),
+      ) as _i2.MainRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.AppError, _i7.MovieResultsEntity>> call(
+          _i8.NoParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
-          #searchMovies,
-          [query],
+          #call,
+          [params],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i6.MovieResultsEntity>(
+            _i5.Future<_i3.Either<_i6.AppError, _i7.MovieResultsEntity>>.value(
+                _FakeEither_1<_i6.AppError, _i7.MovieResultsEntity>(
           this,
           Invocation.method(
-            #searchMovies,
-            [query],
+            #call,
+            [params],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>> getMovies() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMovies,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i6.MovieResultsEntity>(
-          this,
-          Invocation.method(
-            #getMovies,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i7.MovieDetailEntity>> getMovieDetail(
-          int? id) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMovieDetail,
-          [id],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i7.MovieDetailEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i7.MovieDetailEntity>(
-          this,
-          Invocation.method(
-            #getMovieDetail,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i7.MovieDetailEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>
-      getSuggestedMovies(int? id) => (super.noSuchMethod(
-            Invocation.method(
-              #getSuggestedMovies,
-              [id],
-            ),
-            returnValue: _i4
-                .Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i6.MovieResultsEntity>(
-              this,
-              Invocation.method(
-                #getSuggestedMovies,
-                [id],
-              ),
-            )),
-          ) as _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>
-      getPopularMovies() => (super.noSuchMethod(
-            Invocation.method(
-              #getPopularMovies,
-              [],
-            ),
-            returnValue: _i4
-                .Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i6.MovieResultsEntity>(
-              this,
-              Invocation.method(
-                #getPopularMovies,
-                [],
-              ),
-            )),
-          ) as _i4.Future<_i2.Either<_i5.AppError, _i6.MovieResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i8.UserEntity>> getCurrentUser() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getCurrentUser,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.AppError, _i8.UserEntity>>.value(
-            _FakeEither_0<_i5.AppError, _i8.UserEntity>(
-          this,
-          Invocation.method(
-            #getCurrentUser,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i8.UserEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i9.GenreResultsEntity>> getGenres() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getGenres,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i9.GenreResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i9.GenreResultsEntity>(
-          this,
-          Invocation.method(
-            #getGenres,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i9.GenreResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, _i10.TvResultsEntity>> getTv() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getTv,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.AppError, _i10.TvResultsEntity>>.value(
-                _FakeEither_0<_i5.AppError, _i10.TvResultsEntity>(
-          this,
-          Invocation.method(
-            #getTv,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, _i10.TvResultsEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.AppError, void>> editCurrentUser(
-          _i8.UserEntity? user) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #editCurrentUser,
-          [user],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.AppError, void>>.value(
-            _FakeEither_0<_i5.AppError, void>(
-          this,
-          Invocation.method(
-            #editCurrentUser,
-            [user],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.AppError, void>>);
+      ) as _i5.Future<_i3.Either<_i6.AppError, _i7.MovieResultsEntity>>);
 }
